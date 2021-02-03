@@ -1,0 +1,54 @@
+//
+//  DetailViewController.swift
+//  ALL the Beers
+//
+//  Created by Jason Affourtit on 2/03/21.
+//
+
+import UIKit
+
+class DetailViewController: UIViewController {
+    
+    @IBOutlet var flightLabel: UILabel!
+    @IBOutlet var orderLabel: UILabel!
+    @IBOutlet var breweryLabel: UILabel!
+    @IBOutlet var beerStyleLabel: UILabel!
+    @IBOutlet var abvLabel: UILabel!
+    @IBOutlet var ibuLabel: UILabel!
+    @IBOutlet var regionLabel: UILabel!
+    @IBOutlet var ratingLabel: UILabel!
+    @IBOutlet var commentBox: UITextView!
+    @IBOutlet var ratingSlider: UISlider!
+    
+    var beerID: String?
+    var flight: Int?
+    var order: Int?
+    var beerName: String?
+    var brewery: String?
+    var beerStyle: String?
+    var abv: String?
+    var ibu: String?
+    var region: String?
+    var rating = 3.00
+    let step = 0.25
+    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        title = "\(beerID ?? "NA"): \(beerName ?? "NA") "
+        flightLabel.text = flight.map(String.init) ?? "NA"
+        orderLabel.text = order.map(String.init) ?? "NA"
+        breweryLabel.text = brewery ?? "NA"
+        beerStyleLabel.text = beerStyle ?? "NA"
+        abvLabel.text = abv ?? "NA"
+        ibuLabel.text = ibu ?? "NA"
+        ratingLabel.text = String(rating)
+
+    }
+    @IBAction func sliderChanged(_ sender: Any) {
+        
+        var sliderStep = round(Double(ratingSlider.value) / step) * step
+        ratingLabel.text = String(sliderStep)
+    }
+}
