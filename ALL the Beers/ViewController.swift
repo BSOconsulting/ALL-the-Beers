@@ -84,7 +84,7 @@ class ViewController: UITableViewController {
 
             }
         }
-        print(beers)
+        //print(beers)
     }
     
 }

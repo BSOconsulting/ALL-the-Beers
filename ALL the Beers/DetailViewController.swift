@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet var flightLabel: UILabel!
     @IBOutlet var orderLabel: UILabel!
@@ -19,6 +19,7 @@ class DetailViewController: UIViewController {
     @IBOutlet var ratingLabel: UILabel!
     @IBOutlet var commentBox: UITextView!
     @IBOutlet var ratingSlider: UISlider!
+    @IBOutlet var commentView: UIView!
     
     var beerID: String?
     var flight: Int?
@@ -31,16 +32,22 @@ class DetailViewController: UIViewController {
     var region: String?
     var rating = Double()
     let step = 0.25
-    var ratings = [Rating]()
-
+    var ratings = [String: Double]()
+    var reviews = [String: String]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let defaults = UserDefaults.standard
-        let savedResults = defaults.object(forKey: "savedResults") as? [Rating] ?? [Rating]()
-        ratings = savedResults
-        print("loaded ratings = \(ratings)")
-    
+        let savedRatings = defaults.object(forKey: "savedRatings") as? [String: Double] ?? [String: Double]()
+        ratings = savedRatings
+        //print("loaded rating = \(ratings[beerID!] ?? 0.00)")
+        
+        let savedReviews = defaults.object(forKey: "savedReviews") as? [String: String] ?? [String: String]()
+        reviews = savedReviews
+        //print("loaded review = \(reviews[beerID!] ?? "no review")")
+        
         title = "\(beerID ?? "NA"): \(beerName ?? "NA") "
         flightLabel.text = flight.map(String.init) ?? "NA"
         orderLabel.text = order.map(String.init) ?? "NA"
@@ -49,10 +56,50 @@ class DetailViewController: UIViewController {
         abvLabel.text = abv ?? "NA"
         ibuLabel.text = ibu ?? "NA"
         regionLabel.text = region ?? "NA"
-        ratingLabel.text = String(rating)
-        ratingSlider.value = 0.00
+        ratingLabel.text = String(Float(ratings[beerID!] ?? 0.00))
+        ratingSlider.value = Float(ratings[beerID!] ?? 0.00)
+        commentBox.text = reviews[beerID!] ?? ""
+        
+        commentBox.delegate = self // Setting delegate of your UITextField to self
+//        initializeHideKeyboard()
+        
 
     }
+    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//            commentBox.resignFirstResponder()
+//        }
+//
+//
+//        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//            textField.resignFirstResponder()
+//            return true
+//        }
+//
+//    func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector) {
+//            NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
+//        }
+//
+//        func unsubscribeFromAllNotifications() {
+//            NotificationCenter.default.removeObserver(self)
+//        }
+//
+//    func initializeHideKeyboard(){
+//        //Declare a Tap Gesture Recognizer which will trigger our dismissMyKeyboard() function
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+//            target: self,
+//            action: #selector(dismissMyKeyboard))
+//
+//        //Add this tap gesture recognizer to the parent view
+//        view.addGestureRecognizer(tap)
+//    }
+//
+//    @objc func dismissMyKeyboard(){
+//        //endEditing causes the view (or one of its embedded text fields) to resign the first responder status.
+//        //In short- Dismiss the active keyboard.
+//        view.endEditing(true)
+//    }
+    
     @IBAction func sliderChanged(_ sender: Any) {
         
         let sliderStep = round(Double(ratingSlider.value) / step) * step
@@ -61,20 +108,35 @@ class DetailViewController: UIViewController {
         save()
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        save()
+    }
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        print("I'm saving!")
+//        save()
+////        unsubscribeFromAllNotifications()
+//    }
+    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        print("I'm saving!")
+//        save()
+////        unsubscribeFromAllNotifications()
+//    }
+
     func save() {
         let defaults = UserDefaults.standard
         let comments = commentBox.text ?? ""
         
-        if let index = ratings.firstIndex(where: { $0.beerID == beerID }) {
-            ratings[index].rating = rating
-            ratings[index].review = commentBox.text
-            print("edited rating = \(ratings[index])")
+        if beerID != nil {
+            ratings[beerID!] = rating
+            reviews[beerID!] = comments
         }
-        else {
-            let myRating = Rating(beerID: beerID ?? "NA", rating: rating, review: comments)
-            ratings.append(myRating)
-            print("new save. myRating = \(myRating)")
-        }
-        defaults.set(ratings, forKey: "savedResults")
+        
+        
+        defaults.set(ratings, forKey: "savedRatings")
+        defaults.set(reviews, forKey: "savedReviews")
+        print ("savedRatings: \(ratings[beerID!]!)")
+        print ("savedReviews: \(reviews[beerID!]!)")
     }
 }
