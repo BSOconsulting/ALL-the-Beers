@@ -61,44 +61,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         commentBox.text = reviews[beerID!] ?? ""
         
         commentBox.delegate = self // Setting delegate of your UITextField to self
-//        initializeHideKeyboard()
-        
-
     }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//            commentBox.resignFirstResponder()
-//        }
-//
-//
-//        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//            textField.resignFirstResponder()
-//            return true
-//        }
-//
-//    func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector) {
-//            NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
-//        }
-//
-//        func unsubscribeFromAllNotifications() {
-//            NotificationCenter.default.removeObserver(self)
-//        }
-//
-//    func initializeHideKeyboard(){
-//        //Declare a Tap Gesture Recognizer which will trigger our dismissMyKeyboard() function
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-//            target: self,
-//            action: #selector(dismissMyKeyboard))
-//
-//        //Add this tap gesture recognizer to the parent view
-//        view.addGestureRecognizer(tap)
-//    }
-//
-//    @objc func dismissMyKeyboard(){
-//        //endEditing causes the view (or one of its embedded text fields) to resign the first responder status.
-//        //In short- Dismiss the active keyboard.
-//        view.endEditing(true)
-//    }
     
     @IBAction func sliderChanged(_ sender: Any) {
         
@@ -112,18 +75,6 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         save()
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        print("I'm saving!")
-//        save()
-////        unsubscribeFromAllNotifications()
-//    }
-    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        print("I'm saving!")
-//        save()
-////        unsubscribeFromAllNotifications()
-//    }
-
     func save() {
         let defaults = UserDefaults.standard
         let comments = commentBox.text ?? ""
@@ -133,10 +84,9 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             reviews[beerID!] = comments
         }
         
-        
         defaults.set(ratings, forKey: "savedRatings")
         defaults.set(reviews, forKey: "savedReviews")
-        print ("savedRatings: \(ratings[beerID!]!)")
-        print ("savedReviews: \(reviews[beerID!]!)")
+        //print ("savedRatings: \(ratings[beerID!]!)")
+        //print ("savedReviews: \(reviews[beerID!]!)")
     }
 }
