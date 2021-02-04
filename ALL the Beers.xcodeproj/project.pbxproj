@@ -16,6 +16,7 @@
 		9657F22925BA414800AD199A /* Beer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F22825BA414800AD199A /* Beer.swift */; };
 		9657F22F25BA4DCF00AD199A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F22E25BA4DCF00AD199A /* DetailViewController.swift */; };
 		9678302625CB5144002B8308 /* allTheBeer.csv in Resources */ = {isa = PBXBuildFile; fileRef = 9678302525CB5144002B8308 /* allTheBeer.csv */; };
+		968A3C5C25CB6C9500016474 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968A3C5B25CB6C9500016474 /* Rating.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		9657F22825BA414800AD199A /* Beer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beer.swift; sourceTree = "<group>"; };
 		9657F22E25BA4DCF00AD199A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9678302525CB5144002B8308 /* allTheBeer.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = allTheBeer.csv; sourceTree = "<group>"; };
+		968A3C5B25CB6C9500016474 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				9657F21325BA3F6900AD199A /* AppDelegate.swift */,
 				9657F22825BA414800AD199A /* Beer.swift */,
+				968A3C5B25CB6C9500016474 /* Rating.swift */,
 				9657F21525BA3F6900AD199A /* SceneDelegate.swift */,
 				9657F21725BA3F6900AD199A /* ViewController.swift */,
 				9657F22E25BA4DCF00AD199A /* DetailViewController.swift */,
@@ -151,6 +154,7 @@
 				9657F21425BA3F6900AD199A /* AppDelegate.swift in Sources */,
 				9657F22F25BA4DCF00AD199A /* DetailViewController.swift in Sources */,
 				9657F22925BA414800AD199A /* Beer.swift in Sources */,
+				968A3C5C25CB6C9500016474 /* Rating.swift in Sources */,
 				9657F21625BA3F6900AD199A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

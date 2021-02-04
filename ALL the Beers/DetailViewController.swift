@@ -29,12 +29,17 @@ class DetailViewController: UIViewController {
     var abv: String?
     var ibu: String?
     var region: String?
-    var rating = 3.00
+    var rating = Double()
     let step = 0.25
-    
+    var ratings = [Rating]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let defaults = UserDefaults.standard
+        let savedResults = defaults.object(forKey: "savedResults") as? [Rating] ?? [Rating]()
+        ratings = savedResults
+        print("loaded ratings = \(ratings)")
     
         title = "\(beerID ?? "NA"): \(beerName ?? "NA") "
         flightLabel.text = flight.map(String.init) ?? "NA"
@@ -43,12 +48,33 @@ class DetailViewController: UIViewController {
         beerStyleLabel.text = beerStyle ?? "NA"
         abvLabel.text = abv ?? "NA"
         ibuLabel.text = ibu ?? "NA"
+        regionLabel.text = region ?? "NA"
         ratingLabel.text = String(rating)
+        ratingSlider.value = 0.00
 
     }
     @IBAction func sliderChanged(_ sender: Any) {
         
-        var sliderStep = round(Double(ratingSlider.value) / step) * step
-        ratingLabel.text = String(sliderStep)
+        let sliderStep = round(Double(ratingSlider.value) / step) * step
+        rating = sliderStep
+        ratingLabel.text = String(rating)
+        save()
+    }
+    
+    func save() {
+        let defaults = UserDefaults.standard
+        let comments = commentBox.text ?? ""
+        
+        if let index = ratings.firstIndex(where: { $0.beerID == beerID }) {
+            ratings[index].rating = rating
+            ratings[index].review = commentBox.text
+            print("edited rating = \(ratings[index])")
+        }
+        else {
+            let myRating = Rating(beerID: beerID ?? "NA", rating: rating, review: comments)
+            ratings.append(myRating)
+            print("new save. myRating = \(myRating)")
+        }
+        defaults.set(ratings, forKey: "savedResults")
     }
 }
