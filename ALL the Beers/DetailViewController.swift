@@ -62,11 +62,16 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         ibuLabel.text = ibu ?? "NA"
         regionLabel.text = region ?? "NA"
         ratingLabel.text = String(Float(ratings[beerID!] ?? 0.0))
+        // Handle the case where there is no saved rating for the beer
+        if ratingLabel.text == "0.0" {
+            ratingLabel.text = ""
+        }
         ratingSlider.value = Float(ratings[beerID!] ?? 0.00)
         commentBox.text = reviews[beerID!] ?? ""
         
         commentBox.delegate = self // Setting delegate of your UITextField to self
         //reports()
+        
     }
     
 //    func reports() {
@@ -130,6 +135,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         print(ratings, reviews)
         ratingLabel.text = ""
         commentBox.text = ""
+        ratingSlider.value = 0.0
         
         ratings.removeAll()
         reviews.removeAll()
@@ -140,72 +146,94 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        print("saving comments!")
+        //print("saving comments!")
         let comments = commentBox.text ?? ""
         reviews[beerID!] = comments
         save()
     }
     
     @IBAction func saveTapped(_ sender: Any) {
+        
+        if ratingLabel.text == "" {
+            let ac = UIAlertController(title: "Error", message: "You haven't rated this beer.", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
+            return
+        }
         checkStats()
         save()
     }
+    
+    func displayBadge(label: String, name: String) {
+
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "Badge") as? BadgeViewController {
+                //send over the variables
+                vc.label = label
+                vc.imageName = name
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     
     func checkStats() {
         let numReviews = ratings.count
         print("you have \(numReviews) ratings")
         
-        if numReviews == 10 && badges["10beers"] != true {
-            let ac = UIAlertController(title: "BADGE: 😎", message: "Nice! You have 10 ratings!", preferredStyle: .alert)
-            
-            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
-            present(ac, animated: true)
-            badges["10beers"] = true
-            //save()
-        }
-        
-        if numReviews == 25 && badges["25beers"] != true {
-            let ac = UIAlertController(title: "BADGE: 🤪🤪", message: "Well done! You have 25 ratings!", preferredStyle: .alert)
-            
-            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
-            present(ac, animated: true)
-            badges["25beers"] = true
-            //save()
-        }
-        
-        if numReviews == 50 && badges["50beers"] != true {
-            let ac = UIAlertController(title: "BADGE: 😵😵😵", message: "Damn, yo! You have 50 ratings!", preferredStyle: .alert)
-            
-            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
-            present(ac, animated: true)
-            badges["50beers"] = true
-            //save()
-        }
-        
-        if numReviews == 72 && badges["72beers"] != true {
-            let ac = UIAlertController(title: "BADGE: ☠️☠️☠️☠️☠️", message: "WTF DAWG! You have rated all 72 beers!", preferredStyle: .alert)
-            
-            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
-            present(ac, animated: true)
-            badges["72beers"] = true
-            //save()
-        }
-        
         if rating == 5.0 && badges["perfect5"] != true {
-            let ac = UIAlertController(title: "BADGE: 🤩", message: "You rated a beer a perfect 5.0!", preferredStyle: .alert)
-            
-            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
-            present(ac, animated: true)
+            let badgeLabel = "You rated a beer 5.0!\nThat IS a tasty beverage!"
+            let imageName = "perfect5.jpeg"
             badges["perfect5"] = true
+            displayBadge(label: badgeLabel, name: imageName)
+            //return
         }
         
-        if rating < 1.0 && badges["stinker"] != true {
-            let ac = UIAlertController(title: "BADGE: 🤮", message: "You rated a beer < 1.0. Yuck!", preferredStyle: .alert)
-            
-            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
-            present(ac, animated: true)
+        if (rating > 0.0 && rating < 1.0) && badges["stinker"] != true {
+            let badgeLabel = "You rated a beer < 1.0!\nYeah, that's nasty!"
+            let imageName = "nasty.jpeg"
             badges["stinker"] = true
+            displayBadge(label: badgeLabel, name: imageName)
+            //return
         }
+        
+        if numReviews == 1 && badges["10beers"] != true {
+
+            let badgeLabel = "You've rated 10 beers.\nUmmm...a decent start."
+            let imageName = "10beers.png"
+            badges["10beers"] = true
+            displayBadge(label: badgeLabel, name: imageName)
+            //return
+        }
+        
+        if numReviews == 2 && badges["25beers"] != true {
+
+            let badgeLabel = "You've rated 25 beers.\nI like where this is headed!"
+            let imageName = "25beers.png"
+            badges["25beers"] = true
+            displayBadge(label: badgeLabel, name: imageName)
+            //return
+        }
+        
+        if numReviews == 3 && badges["50beers"] != true {
+
+            let badgeLabel = "You've rated 50 beers!\nYou ain't messing around!"
+            let imageName = "50beers.jpg"
+            badges["50beers"] = true
+            displayBadge(label: badgeLabel, name: imageName)
+            //return
+        }
+        
+        if numReviews == 4 && badges["72beers"] != true {
+
+            let badgeLabel = "You've rated all 72 beers!\nWILDCARD!!! ☠️☠️☠️"
+            let imageName = "72beers.jpg"
+            badges["72beers"] = true
+            displayBadge(label: badgeLabel, name: imageName)
+            //return
+        }
+        
+//        else {
+//            self.navigationController?.popViewController(animated: true)
+//        }
          
     }
     
@@ -225,6 +253,6 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         print ("savedRatings: \(ratings)")
         print ("savedReviews: \(reviews)")
         print ("savedBadges: \(badges)")
-        
+        //self.navigationController?.popViewController(animated: true)
     }
 }
