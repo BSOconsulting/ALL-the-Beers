@@ -34,6 +34,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     let step = 0.25
     var ratings = [String: Double]()
     var reviews = [String: String]()
+    var badges = [String: Bool]()
     var beers: [Beer] = []
     
     
@@ -48,6 +49,9 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         let savedReviews = defaults.object(forKey: "savedReviews") as? [String: String] ?? [String: String]()
         reviews = savedReviews
         //print("loaded review = \(reviews[beerID!] ?? "no review")")
+        
+        let savedBadges = defaults.object(forKey: "savedBadges") as? [String: Bool] ?? [String: Bool]()
+        badges = savedBadges
         
         title = "\(beerID ?? "NA"): \(beerName ?? "NA") "
         flightLabel.text = flight.map(String.init) ?? "NA"
@@ -86,6 +90,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         let sliderStep = round(Double(ratingSlider.value) / step) * step
         rating = sliderStep
         ratingLabel.text = String(rating)
+        ratings[beerID!] = rating
         save()
     }
     
@@ -128,27 +133,98 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         
         ratings.removeAll()
         reviews.removeAll()
+        badges.removeAll()
         save()
         print("after:")
         print(ratings, reviews)
     }
     
     func textViewDidChange(_ textView: UITextView) {
+        print("saving comments!")
+        let comments = commentBox.text ?? ""
+        reviews[beerID!] = comments
         save()
+    }
+    
+    @IBAction func saveTapped(_ sender: Any) {
+        checkStats()
+        save()
+    }
+    
+    func checkStats() {
+        let numReviews = ratings.count
+        print("you have \(numReviews) ratings")
+        
+        if numReviews == 10 && badges["10beers"] != true {
+            let ac = UIAlertController(title: "BADGE: 😎", message: "Nice! You have 10 ratings!", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
+            badges["10beers"] = true
+            //save()
+        }
+        
+        if numReviews == 25 && badges["25beers"] != true {
+            let ac = UIAlertController(title: "BADGE: 🤪🤪", message: "Well done! You have 25 ratings!", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
+            badges["25beers"] = true
+            //save()
+        }
+        
+        if numReviews == 50 && badges["50beers"] != true {
+            let ac = UIAlertController(title: "BADGE: 😵😵😵", message: "Damn, yo! You have 50 ratings!", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
+            badges["50beers"] = true
+            //save()
+        }
+        
+        if numReviews == 72 && badges["72beers"] != true {
+            let ac = UIAlertController(title: "BADGE: ☠️☠️☠️☠️☠️", message: "WTF DAWG! You have rated all 72 beers!", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
+            badges["72beers"] = true
+            //save()
+        }
+        
+        if rating == 5.0 && badges["perfect5"] != true {
+            let ac = UIAlertController(title: "BADGE: 🤩", message: "You rated a beer a perfect 5.0!", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
+            badges["perfect5"] = true
+        }
+        
+        if rating < 1.0 && badges["stinker"] != true {
+            let ac = UIAlertController(title: "BADGE: 🤮", message: "You rated a beer < 1.0. Yuck!", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
+            badges["stinker"] = true
+        }
+         
     }
     
     func save() {
         let defaults = UserDefaults.standard
-        let comments = commentBox.text ?? ""
+        //let comments = commentBox.text ?? ""
         
-        if beerID != nil {
-            ratings[beerID!] = rating
-            reviews[beerID!] = comments
-        }
+//        if beerID != nil {
+//            ratings[beerID!] = rating
+            //reviews[beerID!] = comments
+//        }
         
         defaults.set(ratings, forKey: "savedRatings")
         defaults.set(reviews, forKey: "savedReviews")
-        //print ("savedRatings: \(ratings[beerID!]!)")
-        //print ("savedReviews: \(reviews[beerID!]!)")
+        defaults.set(badges, forKey: "savedBadges")
+        //checkStats()
+        print ("savedRatings: \(ratings)")
+        print ("savedReviews: \(reviews)")
+        print ("savedBadges: \(badges)")
+        
     }
 }
