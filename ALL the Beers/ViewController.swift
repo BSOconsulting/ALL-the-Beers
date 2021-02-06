@@ -17,7 +17,6 @@ class ViewController: UITableViewController {
         loadBeers()
         //print ("cities==== \(cities)")
         title = "ALL the Beers! 🍻"
-        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,9 +42,11 @@ class ViewController: UITableViewController {
             vc.abv = beers[indexPath.row].abv
             vc.ibu = beers[indexPath.row].ibu
             vc.region = beers[indexPath.row].region
+            vc.beers = beers
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
     func loadBeers() {
         guard let filepath = Bundle.main.path(forResource: "allTheBeer", ofType: "csv") else {
             return
@@ -81,7 +82,6 @@ class ViewController: UITableViewController {
                 let thisBeer = Beer(beerID: beerID, flight: flight, order: order, beerName: beerName, brewery: brewery, beerStyle: beerStyle, abv: abv, ibu: ibu, region: region)
                 
                 beers.append(thisBeer)
-
             }
         }
         //print(beers)
