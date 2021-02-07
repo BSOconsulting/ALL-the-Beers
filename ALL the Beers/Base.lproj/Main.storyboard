@@ -196,7 +196,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XB4-wU-RBq">
-                                <rect key="frame" x="311" y="528" width="50" height="30"/>
+                                <rect key="frame" x="297" y="528" width="64" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.49778658149999999" green="0.73329311610000003" blue="0.45877772570000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -205,6 +205,19 @@
                                 </state>
                                 <connections>
                                     <action selector="saveTapped:" destination="Y8V-dL-Khx" eventType="touchUpInside" id="HwG-1K-oPR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jev-HE-9T5">
+                                <rect key="frame" x="213" y="528" width="64" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="DELETE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteTapped:" destination="Y8V-dL-Khx" eventType="touchUpInside" id="Cob-2A-moZ"/>
+                                    <action selector="saveTapped:" destination="Y8V-dL-Khx" eventType="touchUpInside" id="Xmw-pH-Fxu"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -286,7 +299,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z42-Om-Fww" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2957.971014492754" y="72.321428571428569"/>
+            <point key="canvasLocation" x="2957.5999999999999" y="71.514242878560722"/>
         </scene>
         <!--Badge View Controller-->
         <scene sceneID="zcl-ua-ZtP">
@@ -448,6 +461,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

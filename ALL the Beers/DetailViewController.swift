@@ -76,21 +76,21 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         
     }
     
-//    func reports() {
-//        let favorite = ratings.values.max()
-//        let keyBest = (ratings.filter { $0.value == favorite }).first?.key
-//        let i = beers.firstIndex(where: { $0.beerID == keyBest }) ?? 0
-//        let favoriteBeer = beers[i].beerName
-//        print ("favorite: \(String(keyBest ?? "NA")) - \(favoriteBeer) - \(Double(favorite ?? 0.00))")
-//
-//        let worst = ratings.values.min()
-//        let keyWorst = (ratings.filter { $0.value == worst }).first?.key
-//        let j = beers.firstIndex(where: { $0.beerID == keyWorst }) ?? 0
-//        let worstBeer = beers[j].beerName
-//        print ("worst: \(String(keyWorst ?? "NA")) - \(worstBeer) - \(Double(worst ?? 0.00))")
-        
-        
-//    }
+    //    func reports() {
+    //        let favorite = ratings.values.max()
+    //        let keyBest = (ratings.filter { $0.value == favorite }).first?.key
+    //        let i = beers.firstIndex(where: { $0.beerID == keyBest }) ?? 0
+    //        let favoriteBeer = beers[i].beerName
+    //        print ("favorite: \(String(keyBest ?? "NA")) - \(favoriteBeer) - \(Double(favorite ?? 0.00))")
+    //
+    //        let worst = ratings.values.min()
+    //        let keyWorst = (ratings.filter { $0.value == worst }).first?.key
+    //        let j = beers.firstIndex(where: { $0.beerID == keyWorst }) ?? 0
+    //        let worstBeer = beers[j].beerName
+    //        print ("worst: \(String(keyWorst ?? "NA")) - \(worstBeer) - \(Double(worst ?? 0.00))")
+    
+    
+    //    }
     
     @IBAction func sliderChanged(_ sender: Any) {
         
@@ -113,18 +113,17 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         present(vc, animated: true)
     }
     
-   
-    @IBAction func trashTapped(_ sender: Any) {
     
+    @IBAction func trashTapped(_ sender: Any) {
+        
         let ac = UIAlertController(title: "Delete all ratings?", message: "Type DELETE and hit OK to delete all ratings", preferredStyle: .alert)
         ac.addTextField()
         
         ac.addAction(UIAlertAction(title: "OK", style: .default) { [weak self, weak ac] _ in
             guard let password = ac?.textFields?[0].text else { return }
             if password == "DELETE" {
-                print("I am going to delete it all!")
+                //print("I am going to delete it all!")
                 self?.deleteReviews()
-                
             }
             else { print ("Nope.") }
         })
@@ -133,8 +132,8 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     }
     
     func deleteReviews() {
-        print("before:")
-        print(ratings, reviews)
+        //        print("before:")
+        //        print(ratings, reviews)
         ratingLabel.text = ""
         commentBox.text = ""
         ratingSlider.value = 0.0
@@ -143,8 +142,8 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         reviews.removeAll()
         badges.removeAll()
         save()
-        print("after:")
-        print(ratings, reviews)
+        //        print("after:")
+        //        print(ratings, reviews)
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -168,29 +167,52 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
     
-    func displayBadge(label: String, name: String) {
-
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "Badge") as? BadgeViewController {
-                //send over the variables
-                vc.label = label
-                vc.imageName = name
-                navigationController?.pushViewController(vc, animated: true)
-            }
+    @IBAction func deleteTapped(_ sender: Any) {
+        ratingLabel.text = ""
+        commentBox.text = ""
+        ratingSlider.value = 0.0
+        
+        print ("before Ratings: \(ratings)")
+        print ("before Reviews: \(reviews)")
+        
+        if ratings.keys.contains(beerID!) {
+            ratings.removeValue(forKey: beerID!)
         }
+        
+        if reviews.keys.contains(beerID!) {
+            reviews.removeValue(forKey: beerID!)
+        }
+        
+//        print ("after Ratings: \(ratings)")
+//        print ("after Reviews: \(reviews)")
+        save()
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+    func displayBadge(label: String, name: String) {
+        
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Badge") as? BadgeViewController {
+            //send over the variables
+            vc.label = label
+            vc.imageName = name
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     
     func checkStyleBadges(style: [String]) -> Bool {
-
-            var yes = 0
-            for i in 0...(style.count - 1) {
-                if ratings.keys.contains(style[i]) {
-                    yes += 1
-                }
-                //else { print ("\(style[i]): no"); return false }
+        
+        var yes = 0
+        for i in 0...(style.count - 1) {
+            if ratings.keys.contains(style[i]) {
+                yes += 1
             }
-            if yes == style.count {
-                //print("\(yes): you get a badge!")
-                return true
-            }
+            //else { print ("\(style[i]): no"); return false }
+        }
+        if yes == style.count {
+            //print("\(yes): you get a badge!")
+            return true
+        }
         return false
     }
     
@@ -214,7 +236,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         let flight3 = ["3-1", "3-2", "3-3", "3-4", "3-5", "3-6", "3-7", "3-8", "3-9", "3-10", "3-11", "3-12", "3-13", "3-14", "3-15", "3-16", "3-17", "3-18"]
         
         let flight4 = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", "4-9", "4-10", "4-11", "4-12", "4-13", "4-14", "4-15", "4-16", "4-17", "4-18"]
-
+        
         
         if hazyIPA.contains(beerID!) && badges["hazy"] != true {
             let earnedBadge = checkStyleBadges(style: hazyIPA)
@@ -333,7 +355,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         }
         
         if numReviews == 10 && badges["10beers"] != true {
-
+            
             let badgeLabel = "You've rated 10 beers.\nUmmm...a decent start."
             let imageName = "10beers.png"
             badges["10beers"] = true
@@ -342,7 +364,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         }
         
         if numReviews == 25 && badges["25beers"] != true {
-
+            
             let badgeLabel = "You've rated 25 beers.\nI like where this is headed!"
             let imageName = "25beers.png"
             badges["25beers"] = true
@@ -351,7 +373,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         }
         
         if numReviews == 50 && badges["50beers"] != true {
-
+            
             let badgeLabel = "You've rated 50 beers!\nYou ain't messing around!"
             let imageName = "50beers.jpg"
             badges["50beers"] = true
@@ -360,7 +382,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         }
         
         if numReviews == 72 && badges["72beers"] != true {
-
+            
             let badgeLabel = "You've rated all 72 beers!\nWILDCARD!!! ☠️☠️☠️"
             let imageName = "72beers.jpg"
             badges["72beers"] = true
@@ -368,30 +390,28 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             //return
         }
         
+        //        else {
+        //            self.navigationController?.popViewController(animated: true)
+        //        }
         
-        
-//        else {
-//            self.navigationController?.popViewController(animated: true)
-//        }
-         
     }
     
     func save() {
         let defaults = UserDefaults.standard
         //let comments = commentBox.text ?? ""
         
-//        if beerID != nil {
-//            ratings[beerID!] = rating
-            //reviews[beerID!] = comments
-//        }
+        //        if beerID != nil {
+        //            ratings[beerID!] = rating
+        //reviews[beerID!] = comments
+        //        }
         
         defaults.set(ratings, forKey: "savedRatings")
         defaults.set(reviews, forKey: "savedReviews")
         defaults.set(badges, forKey: "savedBadges")
         //checkStats()
-        //print ("savedRatings: \(ratings)")
-        //print ("savedReviews: \(reviews)")
-        //print ("savedBadges: \(badges)")
+        print ("savedRatings: \(ratings)")
+        print ("savedReviews: \(reviews)")
+        print ("savedBadges: \(badges)")
         //self.navigationController?.popViewController(animated: true)
     }
 }
