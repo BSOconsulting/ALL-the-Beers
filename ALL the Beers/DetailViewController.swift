@@ -76,21 +76,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         
     }
     
-    //    func reports() {
-    //        let favorite = ratings.values.max()
-    //        let keyBest = (ratings.filter { $0.value == favorite }).first?.key
-    //        let i = beers.firstIndex(where: { $0.beerID == keyBest }) ?? 0
-    //        let favoriteBeer = beers[i].beerName
-    //        print ("favorite: \(String(keyBest ?? "NA")) - \(favoriteBeer) - \(Double(favorite ?? 0.00))")
-    //
-    //        let worst = ratings.values.min()
-    //        let keyWorst = (ratings.filter { $0.value == worst }).first?.key
-    //        let j = beers.firstIndex(where: { $0.beerID == keyWorst }) ?? 0
-    //        let worstBeer = beers[j].beerName
-    //        print ("worst: \(String(keyWorst ?? "NA")) - \(worstBeer) - \(Double(worst ?? 0.00))")
     
-    
-    //    }
     
     @IBAction func sliderChanged(_ sender: Any) {
         
@@ -386,9 +372,9 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         defaults.set(reviews, forKey: "savedReviews")
         defaults.set(badges, forKey: "savedBadges")
         //checkStats()
-//        print ("savedRatings: \(ratings)")
-//        print ("savedReviews: \(reviews)")
-//        print ("savedBadges: \(badges)")
+        print ("savedRatings: \(ratings)")
+        print ("savedReviews: \(reviews)")
+        print ("savedBadges: \(badges)")
         //self.navigationController?.popViewController(animated: true)
     }
 }

@@ -113,6 +113,66 @@ class ViewController: UITableViewController {
         //self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func reportsTapped(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        let savedRatings = defaults.object(forKey: "savedRatings") as? [String: Double] ?? [String: Double]()
+        ratings = savedRatings
+        //print("loaded rating = \(ratings[beerID!] ?? 0.00)")
+        
+        let savedReviews = defaults.object(forKey: "savedReviews") as? [String: String] ?? [String: String]()
+        reviews = savedReviews
+        //print("loaded review = \(reviews[beerID!] ?? "no review")")
+        
+        let savedBadges = defaults.object(forKey: "savedBadges") as? [String: Bool] ?? [String: Bool]()
+        badges = savedBadges
+        
+        
+        var reportText = [Int: String]()
+        
+        var sumRatings = 0.0
+        for value in ratings.values {
+               sumRatings += value
+        }
+        let numRatings = ratings.values.count
+        let avgRatings = (sumRatings / Double(numRatings)).truncate(places:2)
+        
+        let beersRated = ("You have rated \(ratings.keys.count) of 72 beers! [Avg: \(avgRatings)]")
+//        print(beersRated)
+        reportText[1] = beersRated
+        
+        let favorite = ratings.values.max()
+        let keyBest = (ratings.filter { $0.value == favorite }).first?.key
+        let i = beers.firstIndex(where: { $0.beerID == keyBest }) ?? 0
+        let favoriteBeer = beers[i].beerName
+        let myFavoriteBeer = ("Best rating:    \(Double(favorite ?? 0.00))\n [\(String(keyBest ?? "NA"))] \(favoriteBeer)")
+//        print (myFavoriteBeer)
+        reportText[2] = myFavoriteBeer
+        
+        let worst = ratings.values.min()
+        let keyWorst = (ratings.filter { $0.value == worst }).first?.key
+        let j = beers.firstIndex(where: { $0.beerID == keyWorst }) ?? 0
+        let worstBeer = beers[j].beerName
+        let myWorstBeer = ("Worst rating: \(Double(worst ?? 0.00))\n [\(String(keyWorst ?? "NA"))] \(worstBeer)")
+//        print (myWorstBeer)
+        reportText[3] = myWorstBeer
+        
+        let myBadges = ("You have earned \(badges.keys.count) of 17 badges!")
+//        print (myBadges)
+        reportText[4] = myBadges
+        
+        
+        
+        
+        reportText[5] = "\n*Dealer's choice in case of a tie"
+        
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Reports") as? ReportsViewController {
+            //send over the variables
+            vc.myReportText = reportText
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    
     func loadBeers() {
         guard let filepath = Bundle.main.path(forResource: "allTheBeer", ofType: "csv") else {
             return
@@ -154,6 +214,14 @@ class ViewController: UITableViewController {
     }
     
 }
+extension Double
+{
+    func truncate(places : Int)-> Double
+    {
+        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
+    }
+}
 
 
 
+//

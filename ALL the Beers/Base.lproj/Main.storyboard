@@ -40,12 +40,62 @@
                                 <action selector="deleteTapped:" destination="uGe-Yy-Ywo" id="0uY-LT-SeR"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Reports" id="5Uh-HU-dPJ">
+                            <connections>
+                                <action selector="reportsTapped:" destination="uGe-Yy-Ywo" id="PDe-RJ-bzT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gM1-lt-den" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="431.8840579710145" y="58.928571428571423"/>
+        </scene>
+        <!--Reports View Controller-->
+        <scene sceneID="apw-92-c8t">
+            <objects>
+                <viewController storyboardIdentifier="Reports" id="EdV-J3-yTb" customClass="ReportsViewController" customModule="ALL_the_Beers" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kQj-jU-Bvy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mc1-9y-1qT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Brw-wG-Z6k">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="allTheBeers.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="7XD-5d-7y3">
+                                        <rect key="frame" x="0.0" y="376" width="375" height="291"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="291" id="O06-zr-kVA"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hiP-Gf-37t"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="mc1-9y-1qT" firstAttribute="top" secondItem="hiP-Gf-37t" secondAttribute="top" id="COs-03-SBr"/>
+                            <constraint firstItem="mc1-9y-1qT" firstAttribute="bottom" secondItem="hiP-Gf-37t" secondAttribute="bottom" id="OC4-4a-C3h"/>
+                            <constraint firstItem="mc1-9y-1qT" firstAttribute="leading" secondItem="hiP-Gf-37t" secondAttribute="leading" id="Ud4-n5-RBQ"/>
+                            <constraint firstItem="mc1-9y-1qT" firstAttribute="centerX" secondItem="kQj-jU-Bvy" secondAttribute="centerX" id="esK-aG-fo7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="7XD-5d-7y3" id="RSg-Df-aqH"/>
+                        <outlet property="textView" destination="Brw-wG-Z6k" id="zRx-gR-0MP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MY3-Bx-cW0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1194.4000000000001" y="66.11694152923539"/>
         </scene>
         <!--Detail-->
         <scene sceneID="DWp-wV-7Uk">
@@ -432,6 +482,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="allTheBeers.jpeg" width="225" height="225"/>
         <image name="minus" catalog="system" width="128" height="24"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">

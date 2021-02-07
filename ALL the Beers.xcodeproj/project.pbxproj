@@ -26,6 +26,8 @@
 		964590B925CF68970024BDAB /* belgian.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590B825CF68970024BDAB /* belgian.jpg */; };
 		964590BC25CF6B450024BDAB /* twopointfive.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590BB25CF6B450024BDAB /* twopointfive.jpg */; };
 		964590BF25CF6CB00024BDAB /* fivereviews.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590BE25CF6CB00024BDAB /* fivereviews.jpg */; };
+		964590CA25D08C6D0024BDAB /* ReportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964590C925D08C6D0024BDAB /* ReportsViewController.swift */; };
+		964590CD25D08D3D0024BDAB /* allTheBeers.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 964590CC25D08D3D0024BDAB /* allTheBeers.jpeg */; };
 		9657F21425BA3F6900AD199A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21325BA3F6900AD199A /* AppDelegate.swift */; };
 		9657F21625BA3F6900AD199A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21525BA3F6900AD199A /* SceneDelegate.swift */; };
 		9657F21825BA3F6900AD199A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21725BA3F6900AD199A /* ViewController.swift */; };
@@ -60,6 +62,8 @@
 		964590B825CF68970024BDAB /* belgian.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = belgian.jpg; path = BadgeImages/belgian.jpg; sourceTree = SOURCE_ROOT; };
 		964590BB25CF6B450024BDAB /* twopointfive.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = twopointfive.jpg; path = BadgeImages/twopointfive.jpg; sourceTree = SOURCE_ROOT; };
 		964590BE25CF6CB00024BDAB /* fivereviews.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fivereviews.jpg; path = BadgeImages/fivereviews.jpg; sourceTree = SOURCE_ROOT; };
+		964590C925D08C6D0024BDAB /* ReportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewController.swift; sourceTree = "<group>"; };
+		964590CC25D08D3D0024BDAB /* allTheBeers.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = allTheBeers.jpeg; path = BadgeImages/allTheBeers.jpeg; sourceTree = SOURCE_ROOT; };
 		9657F21025BA3F6900AD199A /* ALL the Beers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ALL the Beers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9657F21325BA3F6900AD199A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9657F21525BA3F6900AD199A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 				9645908C25CF0B860024BDAB /* 50beers.jpg */,
 				9645908925CF0A3C0024BDAB /* 25beers.png */,
 				9645908525CEF9610024BDAB /* 10beers.png */,
+				964590CC25D08D3D0024BDAB /* allTheBeers.jpeg */,
 				964590B825CF68970024BDAB /* belgian.jpg */,
 				964590BE25CF6CB00024BDAB /* fivereviews.jpg */,
 				964590A125CF5C220024BDAB /* flight1.jpeg */,
@@ -155,6 +160,7 @@
 				9657F21725BA3F6900AD199A /* ViewController.swift */,
 				9657F22E25BA4DCF00AD199A /* DetailViewController.swift */,
 				9645908125CEF2B30024BDAB /* BadgeViewController.swift */,
+				964590C925D08C6D0024BDAB /* ReportsViewController.swift */,
 				9657F21925BA3F6900AD199A /* Main.storyboard */,
 				9657F21C25BA3F7400AD199A /* Assets.xcassets */,
 				9657F21E25BA3F7400AD199A /* LaunchScreen.storyboard */,
@@ -229,6 +235,7 @@
 				9645909325CF0E280024BDAB /* perfect5.jpeg in Resources */,
 				964590B625CF66A00024BDAB /* light.jpg in Resources */,
 				964590A925CF5D4F0024BDAB /* flight2.jpeg in Resources */,
+				964590CD25D08D3D0024BDAB /* allTheBeers.jpeg in Resources */,
 				964590B925CF68970024BDAB /* belgian.jpg in Resources */,
 				9645908A25CF0A3C0024BDAB /* 25beers.png in Resources */,
 				964590A225CF5C220024BDAB /* flight1.jpeg in Resources */,
@@ -301,6 +308,7 @@
 				9657F21425BA3F6900AD199A /* AppDelegate.swift in Sources */,
 				9657F22F25BA4DCF00AD199A /* DetailViewController.swift in Sources */,
 				9645908225CEF2B30024BDAB /* BadgeViewController.swift in Sources */,
+				964590CA25D08C6D0024BDAB /* ReportsViewController.swift in Sources */,
 				9657F22925BA414800AD199A /* Beer.swift in Sources */,
 				968A3C5C25CB6C9500016474 /* Rating.swift in Sources */,
 				9657F21625BA3F6900AD199A /* SceneDelegate.swift in Sources */,
