@@ -102,32 +102,25 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func shareTapped(_ sender: Any) {
-        //Create the UIImage
-        let renderer = UIGraphicsImageRenderer(size: view.frame.size)
-        let image = renderer.image(actions: { context in
-            view.layer.render(in: context.cgContext)
-        })
+        //Create the UIImage - this way didn't capture the title (beer name)
+//        let renderer = UIGraphicsImageRenderer(size: view.frame.size)
+//        let image = renderer.image(actions: { context in
+//            view.layer.render(in: context.cgContext)
+//        })
+        
+        var image :UIImage?
+                let layer = UIApplication.shared.keyWindow!.layer
+                let scale = UIScreen.main.scale
+                UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+                guard let context = UIGraphicsGetCurrentContext() else {return}
+                layer.render(in:context)
+                image = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
         
         //Share the results
-        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        let vc = UIActivityViewController(activityItems: [image!], applicationActivities: [])
         present(vc, animated: true)
     }
-    
-    
-//    func deleteReviews() {
-//        //        print("before:")
-//        //        print(ratings, reviews)
-//        ratingLabel.text = ""
-//        commentBox.text = ""
-//        ratingSlider.value = 0.0
-//        
-//        ratings.removeAll()
-//        reviews.removeAll()
-//        badges.removeAll()
-//        save()
-//        //        print("after:")
-//        //        print(ratings, reviews)
-//    }
     
     func textViewDidChange(_ textView: UITextView) {
         //print("saving comments!")
@@ -393,9 +386,9 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         defaults.set(reviews, forKey: "savedReviews")
         defaults.set(badges, forKey: "savedBadges")
         //checkStats()
-        print ("savedRatings: \(ratings)")
-        print ("savedReviews: \(reviews)")
-        print ("savedBadges: \(badges)")
+//        print ("savedRatings: \(ratings)")
+//        print ("savedReviews: \(reviews)")
+//        print ("savedBadges: \(badges)")
         //self.navigationController?.popViewController(animated: true)
     }
 }

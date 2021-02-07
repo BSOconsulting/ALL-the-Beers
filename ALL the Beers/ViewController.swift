@@ -106,13 +106,12 @@ class ViewController: UITableViewController {
         defaults.set(reviews, forKey: "savedReviews")
         defaults.set(badges, forKey: "savedBadges")
         //checkStats()
-        print ("savedRatings: \(ratings)")
-        print ("savedReviews: \(reviews)")
-        print ("savedBadges: \(badges)")
+//        print ("savedRatings: \(ratings)")
+//        print ("savedReviews: \(reviews)")
+//        print ("savedBadges: \(badges)")
         self.tableView.reloadData()
         //self.navigationController?.popViewController(animated: true)
     }
-    
     
     func loadBeers() {
         guard let filepath = Bundle.main.path(forResource: "allTheBeer", ofType: "csv") else {
