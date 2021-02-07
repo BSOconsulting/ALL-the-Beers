@@ -27,6 +27,7 @@
 		964590BC25CF6B450024BDAB /* twopointfive.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590BB25CF6B450024BDAB /* twopointfive.jpg */; };
 		964590BF25CF6CB00024BDAB /* fivereviews.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590BE25CF6CB00024BDAB /* fivereviews.jpg */; };
 		964590C225CFB9AD0024BDAB /* checkmark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590C125CFB9AD0024BDAB /* checkmark.jpg */; };
+		964590C525CFBAAA0024BDAB /* red-x.png in Resources */ = {isa = PBXBuildFile; fileRef = 964590C425CFBAAA0024BDAB /* red-x.png */; };
 		9657F21425BA3F6900AD199A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21325BA3F6900AD199A /* AppDelegate.swift */; };
 		9657F21625BA3F6900AD199A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21525BA3F6900AD199A /* SceneDelegate.swift */; };
 		9657F21825BA3F6900AD199A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21725BA3F6900AD199A /* ViewController.swift */; };
@@ -62,6 +63,7 @@
 		964590BB25CF6B450024BDAB /* twopointfive.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = twopointfive.jpg; path = BadgeImages/twopointfive.jpg; sourceTree = SOURCE_ROOT; };
 		964590BE25CF6CB00024BDAB /* fivereviews.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fivereviews.jpg; path = BadgeImages/fivereviews.jpg; sourceTree = SOURCE_ROOT; };
 		964590C125CFB9AD0024BDAB /* checkmark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = checkmark.jpg; path = BadgeImages/checkmark.jpg; sourceTree = SOURCE_ROOT; };
+		964590C425CFBAAA0024BDAB /* red-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-x.png"; path = "BadgeImages/red-x.png"; sourceTree = SOURCE_ROOT; };
 		9657F21025BA3F6900AD199A /* ALL the Beers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ALL the Beers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9657F21325BA3F6900AD199A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9657F21525BA3F6900AD199A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				964590C125CFB9AD0024BDAB /* checkmark.jpg */,
+				964590C425CFBAAA0024BDAB /* red-x.png */,
 				9645908F25CF0D000024BDAB /* 72beers.jpg */,
 				9645908C25CF0B860024BDAB /* 50beers.jpg */,
 				9645908925CF0A3C0024BDAB /* 25beers.png */,
@@ -248,6 +251,7 @@
 				9645908625CEF9610024BDAB /* 10beers.png in Resources */,
 				964590C225CFB9AD0024BDAB /* checkmark.jpg in Resources */,
 				9657F21D25BA3F7400AD199A /* Assets.xcassets in Resources */,
+				964590C525CFBAAA0024BDAB /* red-x.png in Resources */,
 				9657F21B25BA3F6900AD199A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

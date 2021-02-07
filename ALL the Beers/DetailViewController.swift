@@ -114,37 +114,20 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     }
     
     
-    @IBAction func trashTapped(_ sender: Any) {
-        
-        let ac = UIAlertController(title: "Delete all ratings?", message: "Type DELETE and hit OK to delete all ratings", preferredStyle: .alert)
-        ac.addTextField()
-        
-        ac.addAction(UIAlertAction(title: "OK", style: .default) { [weak self, weak ac] _ in
-            guard let password = ac?.textFields?[0].text else { return }
-            if password == "DELETE" {
-                //print("I am going to delete it all!")
-                self?.deleteReviews()
-            }
-            else { print ("Nope.") }
-        })
-        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(ac, animated: true)
-    }
-    
-    func deleteReviews() {
-        //        print("before:")
-        //        print(ratings, reviews)
-        ratingLabel.text = ""
-        commentBox.text = ""
-        ratingSlider.value = 0.0
-        
-        ratings.removeAll()
-        reviews.removeAll()
-        badges.removeAll()
-        save()
-        //        print("after:")
-        //        print(ratings, reviews)
-    }
+//    func deleteReviews() {
+//        //        print("before:")
+//        //        print(ratings, reviews)
+//        ratingLabel.text = ""
+//        commentBox.text = ""
+//        ratingSlider.value = 0.0
+//        
+//        ratings.removeAll()
+//        reviews.removeAll()
+//        badges.removeAll()
+//        save()
+//        //        print("after:")
+//        //        print(ratings, reviews)
+//    }
     
     func textViewDidChange(_ textView: UITextView) {
         //print("saving comments!")

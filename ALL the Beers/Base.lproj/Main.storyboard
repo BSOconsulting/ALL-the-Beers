@@ -18,21 +18,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Beer" textLabel="3K0-c4-OwP" style="IBUITableViewCellStyleDefault" id="oXT-Ce-iGI">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="Beer" id="oXT-Ce-iGI">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oXT-Ce-iGI" id="NpG-xF-jsd">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3K0-c4-OwP">
-                                            <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -42,7 +33,14 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="cgb-NG-bgg"/>
+                    <navigationItem key="navigationItem" id="cgb-NG-bgg">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="hk9-sb-LqF">
+                            <color key="tintColor" red="1" green="0.25806271749999998" blue="0.096023618229999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="deleteTapped:" destination="uGe-Yy-Ywo" id="0uY-LT-SeR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gM1-lt-den" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -269,19 +267,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ksz-1T-UJ6">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="action" id="CpK-cv-m0b">
-                                <connections>
-                                    <action selector="shareTapped:" destination="Y8V-dL-Khx" id="e4D-mw-dKY"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="trash" id="Lbs-x0-7g4">
-                                <color key="tintColor" red="1" green="0.25806271749999998" blue="0.096023618229999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="trashTapped:" destination="Y8V-dL-Khx" id="ouQ-wt-CLg"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="CpK-cv-m0b">
+                            <connections>
+                                <action selector="shareTapped:" destination="Y8V-dL-Khx" id="e4D-mw-dKY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

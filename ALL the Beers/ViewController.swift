@@ -10,20 +10,30 @@ import UIKit
 class ViewController: UITableViewController {
     
     var beers = [Beer]()
+    var ratings = [String: Double]()
+    var reviews = [String: String]()
+    var badges = [String: Bool]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadBeers()
-        //print ("cities==== \(cities)")
-        
         title = "ALL the Beers! 🍻"
-    }
-    override func viewDidAppear(_ animated: Bool) {
+        
         let defaults = UserDefaults.standard
         let savedRatings = defaults.object(forKey: "savedRatings") as? [String: Double] ?? [String: Double]()
-        print("\(savedRatings.count)")
+        ratings = savedRatings
+        //print("loaded rating = \(ratings[beerID!] ?? 0.00)")
         
+        let savedReviews = defaults.object(forKey: "savedReviews") as? [String: String] ?? [String: String]()
+        reviews = savedReviews
+        //print("loaded review = \(reviews[beerID!] ?? "no review")")
+        
+        let savedBadges = defaults.object(forKey: "savedBadges") as? [String: Bool] ?? [String: Bool]()
+        badges = savedBadges
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -31,9 +41,18 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let defaults = UserDefaults.standard
+        let savedRatings = defaults.object(forKey: "savedRatings") as? [String: Double] ?? [String: Double]()
+        ratings = savedRatings
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Beer", for: indexPath)
         let theBeer = beers[indexPath.row]
         cell.textLabel?.text = "\(theBeer.beerID): \(theBeer.beerName)"
+        //print("\(ratings.keys)")
+        if ratings.keys.contains(theBeer.beerID) {
+            cell.accessoryType = .checkmark
+        }
+        else { cell.accessoryType = .none }
         return cell
     }
     
@@ -53,6 +72,47 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    @IBAction func deleteTapped(_ sender: Any) {
+        let ac = UIAlertController(title: "Delete all ratings?", message: "Type DELETE and hit OK to delete all ratings", preferredStyle: .alert)
+        ac.addTextField()
+        
+        ac.addAction(UIAlertAction(title: "OK", style: .default) { [weak self, weak ac] _ in
+            guard let password = ac?.textFields?[0].text else { return }
+            if password == "DELETE" {
+                //print("I am going to delete it all!")
+                self?.deleteReviews()
+            }
+            else { print ("Nope.") }
+        })
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
+    }
+    
+    func deleteReviews() {
+        //        print("before:")
+        //        print(ratings, reviews)
+        
+        ratings.removeAll()
+        reviews.removeAll()
+        badges.removeAll()
+        save()
+        //        print("after:")
+        //        print(ratings, reviews)
+    }
+    
+    func save() {
+        let defaults = UserDefaults.standard
+        defaults.set(ratings, forKey: "savedRatings")
+        defaults.set(reviews, forKey: "savedReviews")
+        defaults.set(badges, forKey: "savedBadges")
+        //checkStats()
+        print ("savedRatings: \(ratings)")
+        print ("savedReviews: \(reviews)")
+        print ("savedBadges: \(badges)")
+        self.tableView.reloadData()
+        //self.navigationController?.popViewController(animated: true)
+    }
+    
     
     func loadBeers() {
         guard let filepath = Bundle.main.path(forResource: "allTheBeer", ofType: "csv") else {
