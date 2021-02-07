@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class DetailViewController: UIViewController, UITextViewDelegate {
     
@@ -71,6 +72,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         
         commentBox.delegate = self // Setting delegate of your UITextField to self
         //reports()
+        
         
     }
     
@@ -161,8 +163,9 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             present(ac, animated: true)
             return
         }
-        checkStats()
+        checkBadges()
         save()
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
     
     func displayBadge(label: String, name: String) {
@@ -175,14 +178,108 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             }
         }
     
-    func checkStats() {
+    func checkStyleBadges(style: [String]) -> Bool {
+
+            var yes = 0
+            for i in 0...(style.count - 1) {
+                if ratings.keys.contains(style[i]) {
+                    yes += 1
+                }
+                //else { print ("\(style[i]): no"); return false }
+            }
+            if yes == style.count {
+                //print("\(yes): you get a badge!")
+                return true
+            }
+        return false
+    }
+    
+    
+    func checkBadges() {
         let numReviews = ratings.count
         print("you have \(numReviews) ratings")
+        
+        let hazyIPA = ["1-5", "1-6", "1-7", "1-8", "2-7", "2-8", "2-9", "2-10", "3-5", "3-6", "3-7", "4-6", "4-7", "4-8"]
+        
+        let IPA = ["1-9", "1-10", "1-11", "1-12", "1-13", "1-14", "2-11", "2-12", "2-13", "2-14", "2-15", "3-8", "3-9", "3-10", "3-11", "3-12", "3-13", "3-14", "4-9", "4-10", "4-11", "4-12", "4-13", "4-14", "4-15"]
+        
+        let strong = ["2-17", "3-17", "4-17", "4-18"]
+        
+        let light = ["1-1", "1-5", "2-1", "2-2", "2-5", "3-1", "3-2", "4-1"]
+        
+        let flight1 = ["1-1", "1-2", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-11", "1-12", "1-13", "1-14", "1-15", "1-16", "1-17", "1-18"]
+        
+        let flight2 = ["2-1", "2-2", "2-3", "2-4", "2-5", "2-6", "2-7", "2-8", "2-9", "2-10", "2-11", "2-12", "2-13", "2-14", "2-15", "2-16", "2-17", "2-18"]
+        
+        let flight3 = ["3-1", "3-2", "3-3", "3-4", "3-5", "3-6", "3-7", "3-8", "3-9", "3-10", "3-11", "3-12", "3-13", "3-14", "3-15", "3-16", "3-17", "3-18"]
+        
+        let flight4 = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", "4-9", "4-10", "4-11", "4-12", "4-13", "4-14", "4-15", "4-16", "4-17", "4-18"]
+
+        
+        if hazyIPA.contains(beerID!) && badges["hazy"] != true {
+            let earnedBadge = checkStyleBadges(style: hazyIPA)
+            if earnedBadge == true {
+                let badgeLabel = "ALL the Hazy IPAs rated!\nSUCH a hipster 🧔🏻"
+                let imageName = "hazy.jpg"
+                badges["hazy"] = true
+                displayBadge(label: badgeLabel, name: imageName)
+            }
+        }
+        
+        if IPA.contains(beerID!) && badges["IPA"] != true {
+            let earnedBadge = checkStyleBadges(style: IPA)
+            if earnedBadge == true {
+                let badgeLabel = "ALL the single IPAs rated!\nHip HOP Hooray!"
+                let imageName = "IPA.jpg"
+                badges["IPA"] = true
+                displayBadge(label: badgeLabel, name: imageName)
+            }
+        }
+        
+        if light.contains(beerID!) && badges["light"] != true {
+            let earnedBadge = checkStyleBadges(style: light)
+            if earnedBadge == true {
+                let badgeLabel = "All ≦5% ABV beers rated!\nThere's only BOOZE now"
+                let imageName = "light.jpg"
+                badges["light"] = true
+                displayBadge(label: badgeLabel, name: imageName)
+            }
+        }
+        
+        if strong.contains(beerID!) && badges["strong"] != true {
+            let badgeLabel = "You rated a beer >9% ABV!\nBOOZE all day! 🥃"
+            let imageName = "strong.jpg"
+            badges["strong"] = true
+            displayBadge(label: badgeLabel, name: imageName)
+        }
+        
+        if beerID! == "1-16" && badges["belgian"] != true {
+            let badgeLabel = "You drank a Belgian beer! 🇧🇪\nWTF it's the only one?"
+            let imageName = "belgian.jpg"
+            badges["belgian"] = true
+            displayBadge(label: badgeLabel, name: imageName)
+        }
         
         if rating == 5.0 && badges["perfect5"] != true {
             let badgeLabel = "You rated a beer 5.0!\nThat IS a tasty beverage!"
             let imageName = "perfect5.jpeg"
             badges["perfect5"] = true
+            displayBadge(label: badgeLabel, name: imageName)
+            //return
+        }
+        
+        if rating == 2.5 && badges["twopointfive"] != true {
+            let badgeLabel = "You rated a beer 2.5.\nNot great, not terrible..."
+            let imageName = "twopointfive.jpg"
+            badges["twopointfive"] = true
+            displayBadge(label: badgeLabel, name: imageName)
+            //return
+        }
+        
+        if reviews.keys.count == 5 && badges["fivereviews"] != true {
+            let badgeLabel = "You wrote five comments!\nYour effort is impressive."
+            let imageName = "fivereviews.jpg"
+            badges["fivereviews"] = true
             displayBadge(label: badgeLabel, name: imageName)
             //return
         }
@@ -195,7 +292,47 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             //return
         }
         
-        if numReviews == 1 && badges["10beers"] != true {
+        if flight1.contains(beerID!) && badges["flight1"] != true {
+            let earnedBadge = checkStyleBadges(style: flight1)
+            if earnedBadge == true {
+                let badgeLabel = "ALL of Flight 1 rated!\nOnly 75% more to go..."
+                let imageName = "flight1.jpeg"
+                badges["flight1"] = true
+                displayBadge(label: badgeLabel, name: imageName)
+            }
+        }
+        
+        if flight2.contains(beerID!) && badges["flight2"] != true {
+            let earnedBadge = checkStyleBadges(style: flight2)
+            if earnedBadge == true {
+                let badgeLabel = "ALL of Flight 2 rated!\n50% down, 50% to go..."
+                let imageName = "flight2.jpeg"
+                badges["flight2"] = true
+                displayBadge(label: badgeLabel, name: imageName)
+            }
+        }
+        
+        if flight3.contains(beerID!) && badges["flight3"] != true {
+            let earnedBadge = checkStyleBadges(style: flight3)
+            if earnedBadge == true {
+                let badgeLabel = "ALL of Flight 3 rated!\nSo close and yet so far."
+                let imageName = "flight3.jpg"
+                badges["flight3"] = true
+                displayBadge(label: badgeLabel, name: imageName)
+            }
+        }
+        
+        if flight4.contains(beerID!) && badges["flight4"] != true {
+            let earnedBadge = checkStyleBadges(style: flight4)
+            if earnedBadge == true {
+                let badgeLabel = "ALL of Flight 4 rated!\nBAM! Got 'er done."
+                let imageName = "flight4.jpeg"
+                badges["flight4"] = true
+                displayBadge(label: badgeLabel, name: imageName)
+            }
+        }
+        
+        if numReviews == 10 && badges["10beers"] != true {
 
             let badgeLabel = "You've rated 10 beers.\nUmmm...a decent start."
             let imageName = "10beers.png"
@@ -204,7 +341,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             //return
         }
         
-        if numReviews == 2 && badges["25beers"] != true {
+        if numReviews == 25 && badges["25beers"] != true {
 
             let badgeLabel = "You've rated 25 beers.\nI like where this is headed!"
             let imageName = "25beers.png"
@@ -213,7 +350,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             //return
         }
         
-        if numReviews == 3 && badges["50beers"] != true {
+        if numReviews == 50 && badges["50beers"] != true {
 
             let badgeLabel = "You've rated 50 beers!\nYou ain't messing around!"
             let imageName = "50beers.jpg"
@@ -222,7 +359,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             //return
         }
         
-        if numReviews == 4 && badges["72beers"] != true {
+        if numReviews == 72 && badges["72beers"] != true {
 
             let badgeLabel = "You've rated all 72 beers!\nWILDCARD!!! ☠️☠️☠️"
             let imageName = "72beers.jpg"
@@ -230,6 +367,8 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             displayBadge(label: badgeLabel, name: imageName)
             //return
         }
+        
+        
         
 //        else {
 //            self.navigationController?.popViewController(animated: true)
@@ -250,9 +389,10 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         defaults.set(reviews, forKey: "savedReviews")
         defaults.set(badges, forKey: "savedBadges")
         //checkStats()
-        print ("savedRatings: \(ratings)")
-        print ("savedReviews: \(reviews)")
-        print ("savedBadges: \(badges)")
+        //print ("savedRatings: \(ratings)")
+        //print ("savedReviews: \(reviews)")
+        //print ("savedBadges: \(badges)")
         //self.navigationController?.popViewController(animated: true)
     }
 }
+

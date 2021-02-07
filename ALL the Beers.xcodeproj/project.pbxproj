@@ -15,6 +15,17 @@
 		9645909025CF0D000024BDAB /* 72beers.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9645908F25CF0D000024BDAB /* 72beers.jpg */; };
 		9645909325CF0E280024BDAB /* perfect5.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9645909225CF0E280024BDAB /* perfect5.jpeg */; };
 		9645909625CF148E0024BDAB /* nasty.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 9645909525CF148E0024BDAB /* nasty.jpeg */; };
+		9645909925CF52F90024BDAB /* hazy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9645909825CF52F90024BDAB /* hazy.jpg */; };
+		9645909F25CF58AF0024BDAB /* strong.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9645909E25CF58AF0024BDAB /* strong.jpg */; };
+		964590A225CF5C220024BDAB /* flight1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 964590A125CF5C220024BDAB /* flight1.jpeg */; };
+		964590A625CF5D100024BDAB /* IPA.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590A525CF5D100024BDAB /* IPA.jpg */; };
+		964590A925CF5D4F0024BDAB /* flight2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 964590A825CF5D4F0024BDAB /* flight2.jpeg */; };
+		964590AC25CF5E300024BDAB /* flight3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590AB25CF5E300024BDAB /* flight3.jpg */; };
+		964590AF25CF60110024BDAB /* flight4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 964590AE25CF60110024BDAB /* flight4.jpeg */; };
+		964590B625CF66A00024BDAB /* light.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590B525CF66A00024BDAB /* light.jpg */; };
+		964590B925CF68970024BDAB /* belgian.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590B825CF68970024BDAB /* belgian.jpg */; };
+		964590BC25CF6B450024BDAB /* twopointfive.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590BB25CF6B450024BDAB /* twopointfive.jpg */; };
+		964590BF25CF6CB00024BDAB /* fivereviews.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590BE25CF6CB00024BDAB /* fivereviews.jpg */; };
 		9657F21425BA3F6900AD199A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21325BA3F6900AD199A /* AppDelegate.swift */; };
 		9657F21625BA3F6900AD199A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21525BA3F6900AD199A /* SceneDelegate.swift */; };
 		9657F21825BA3F6900AD199A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21725BA3F6900AD199A /* ViewController.swift */; };
@@ -38,6 +49,17 @@
 		9645908F25CF0D000024BDAB /* 72beers.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 72beers.jpg; path = BadgeImages/72beers.jpg; sourceTree = SOURCE_ROOT; };
 		9645909225CF0E280024BDAB /* perfect5.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = perfect5.jpeg; path = BadgeImages/perfect5.jpeg; sourceTree = SOURCE_ROOT; };
 		9645909525CF148E0024BDAB /* nasty.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = nasty.jpeg; path = BadgeImages/nasty.jpeg; sourceTree = SOURCE_ROOT; };
+		9645909825CF52F90024BDAB /* hazy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = hazy.jpg; path = BadgeImages/hazy.jpg; sourceTree = SOURCE_ROOT; };
+		9645909E25CF58AF0024BDAB /* strong.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = strong.jpg; path = BadgeImages/strong.jpg; sourceTree = SOURCE_ROOT; };
+		964590A125CF5C220024BDAB /* flight1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = flight1.jpeg; path = BadgeImages/flight1.jpeg; sourceTree = SOURCE_ROOT; };
+		964590A525CF5D100024BDAB /* IPA.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = IPA.jpg; path = BadgeImages/IPA.jpg; sourceTree = SOURCE_ROOT; };
+		964590A825CF5D4F0024BDAB /* flight2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = flight2.jpeg; path = BadgeImages/flight2.jpeg; sourceTree = SOURCE_ROOT; };
+		964590AB25CF5E300024BDAB /* flight3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = flight3.jpg; path = BadgeImages/flight3.jpg; sourceTree = SOURCE_ROOT; };
+		964590AE25CF60110024BDAB /* flight4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = flight4.jpeg; path = BadgeImages/flight4.jpeg; sourceTree = SOURCE_ROOT; };
+		964590B525CF66A00024BDAB /* light.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = light.jpg; path = BadgeImages/light.jpg; sourceTree = SOURCE_ROOT; };
+		964590B825CF68970024BDAB /* belgian.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = belgian.jpg; path = BadgeImages/belgian.jpg; sourceTree = SOURCE_ROOT; };
+		964590BB25CF6B450024BDAB /* twopointfive.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = twopointfive.jpg; path = BadgeImages/twopointfive.jpg; sourceTree = SOURCE_ROOT; };
+		964590BE25CF6CB00024BDAB /* fivereviews.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fivereviews.jpg; path = BadgeImages/fivereviews.jpg; sourceTree = SOURCE_ROOT; };
 		9657F21025BA3F6900AD199A /* ALL the Beers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ALL the Beers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9657F21325BA3F6900AD199A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9657F21525BA3F6900AD199A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,8 +110,19 @@
 				9645908C25CF0B860024BDAB /* 50beers.jpg */,
 				9645908925CF0A3C0024BDAB /* 25beers.png */,
 				9645908525CEF9610024BDAB /* 10beers.png */,
+				964590B825CF68970024BDAB /* belgian.jpg */,
+				964590BE25CF6CB00024BDAB /* fivereviews.jpg */,
+				964590A125CF5C220024BDAB /* flight1.jpeg */,
+				964590A825CF5D4F0024BDAB /* flight2.jpeg */,
+				964590AB25CF5E300024BDAB /* flight3.jpg */,
+				964590AE25CF60110024BDAB /* flight4.jpeg */,
+				9645909825CF52F90024BDAB /* hazy.jpg */,
+				964590A525CF5D100024BDAB /* IPA.jpg */,
+				964590B525CF66A00024BDAB /* light.jpg */,
 				9645909525CF148E0024BDAB /* nasty.jpeg */,
 				9645909225CF0E280024BDAB /* perfect5.jpeg */,
+				9645909E25CF58AF0024BDAB /* strong.jpg */,
+				964590BB25CF6B450024BDAB /* twopointfive.jpg */,
 			);
 			path = BadgeImages;
 			sourceTree = "<group>";
@@ -191,12 +224,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				964590A625CF5D100024BDAB /* IPA.jpg in Resources */,
+				964590BC25CF6B450024BDAB /* twopointfive.jpg in Resources */,
 				9645909325CF0E280024BDAB /* perfect5.jpeg in Resources */,
+				964590B625CF66A00024BDAB /* light.jpg in Resources */,
+				964590A925CF5D4F0024BDAB /* flight2.jpeg in Resources */,
+				964590B925CF68970024BDAB /* belgian.jpg in Resources */,
 				9645908A25CF0A3C0024BDAB /* 25beers.png in Resources */,
+				964590A225CF5C220024BDAB /* flight1.jpeg in Resources */,
 				9678302625CB5144002B8308 /* allTheBeer.csv in Resources */,
 				9657F22025BA3F7400AD199A /* LaunchScreen.storyboard in Resources */,
 				9645908D25CF0B860024BDAB /* 50beers.jpg in Resources */,
+				9645909F25CF58AF0024BDAB /* strong.jpg in Resources */,
+				964590BF25CF6CB00024BDAB /* fivereviews.jpg in Resources */,
+				964590AF25CF60110024BDAB /* flight4.jpeg in Resources */,
+				9645909925CF52F90024BDAB /* hazy.jpg in Resources */,
 				9645909625CF148E0024BDAB /* nasty.jpeg in Resources */,
+				964590AC25CF5E300024BDAB /* flight3.jpg in Resources */,
 				9645909025CF0D000024BDAB /* 72beers.jpg in Resources */,
 				9645908625CEF9610024BDAB /* 10beers.png in Resources */,
 				9657F21D25BA3F7400AD199A /* Assets.xcassets in Resources */,
