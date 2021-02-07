@@ -186,6 +186,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
 //        print ("after Ratings: \(ratings)")
 //        print ("after Reviews: \(reviews)")
         save()
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -299,7 +300,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         }
         
         if reviews.keys.count == 5 && badges["fivereviews"] != true {
-            let badgeLabel = "You wrote five comments!\nYour effort is impressive."
+            let badgeLabel = "You wrote five comments!\nTURKEY TIME!!! 🦃"
             let imageName = "fivereviews.jpg"
             badges["fivereviews"] = true
             displayBadge(label: badgeLabel, name: imageName)
@@ -356,7 +357,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         
         if numReviews == 10 && badges["10beers"] != true {
             
-            let badgeLabel = "You've rated 10 beers.\nUmmm...a decent start."
+            let badgeLabel = "You've rated 10 beers.\nYOUR MOVE."
             let imageName = "10beers.png"
             badges["10beers"] = true
             displayBadge(label: badgeLabel, name: imageName)

@@ -16,7 +16,14 @@ class ViewController: UITableViewController {
         
         loadBeers()
         //print ("cities==== \(cities)")
+        
         title = "ALL the Beers! 🍻"
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        let defaults = UserDefaults.standard
+        let savedRatings = defaults.object(forKey: "savedRatings") as? [String: Double] ?? [String: Double]()
+        print("\(savedRatings.count)")
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
