@@ -37,6 +37,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     var reviews = [String: String]()
     var badges = [String: Bool]()
     var beers: [Beer] = []
+    var alert: UIAlertController!
     
     
     override func viewDidLoad() {
@@ -127,6 +128,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         checkBadges()
         save()
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        notifyUser()
     }
     
     @IBAction func deleteTapped(_ sender: Any) {
@@ -353,9 +355,9 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             //return
         }
         
-        //        else {
-        //            self.navigationController?.popViewController(animated: true)
-        //        }
+//                else {
+//                    self.navigationController?.popViewController(animated: true)
+//                }
         
     }
     
@@ -376,6 +378,28 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         print ("savedReviews: \(reviews)")
         print ("savedBadges: \(badges)")
         //self.navigationController?.popViewController(animated: true)
+    }
+    
+    func notifyUser()
+    {
+        let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "", style: .cancel, handler: { action in
+                switch action.style{
+                case .default:
+                    print("default")
+
+                case .cancel:
+                    print("cancel")
+
+                case .destructive:
+                    print("destructive")
+
+                }}))
+            self.present(alert, animated: true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+
+                alert.dismiss(animated: true, completion: nil)
+            }
     }
 }
 

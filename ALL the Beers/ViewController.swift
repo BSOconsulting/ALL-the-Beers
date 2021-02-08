@@ -134,8 +134,7 @@ class ViewController: UITableViewController {
                sumRatings += value
         }
         let numRatings = ratings.values.count
-        let avgRatings = (sumRatings / Double(numRatings)).truncate(places:2)
-        
+        let avgRatings = (sumRatings / Double(numRatings)).truncate(places:2)    
         let beersRated = ("You have rated \(ratings.keys.count) of 72 beers! [Avg: \(avgRatings)]")
 //        print(beersRated)
         reportText[1] = beersRated
