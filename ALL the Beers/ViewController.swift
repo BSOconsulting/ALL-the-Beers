@@ -144,7 +144,8 @@ class ViewController: UITableViewController {
         let keyBest = (ratings.filter { $0.value == favorite }).first?.key
         let i = beers.firstIndex(where: { $0.beerID == keyBest }) ?? 0
         let favoriteBeer = beers[i].beerName
-        let myFavoriteBeer = ("Best rating:    \(Double(favorite ?? 0.00))\n [\(String(keyBest ?? "NA"))] \(favoriteBeer)")
+        let favoriteBrewery = beers[i].brewery
+        let myFavoriteBeer = ("Best rating:    \(Double(favorite ?? 0.00))\n [\(String(keyBest ?? "NA"))] \(favoriteBeer) - \(favoriteBrewery)")
 //        print (myFavoriteBeer)
         reportText[2] = myFavoriteBeer
         
@@ -152,7 +153,8 @@ class ViewController: UITableViewController {
         let keyWorst = (ratings.filter { $0.value == worst }).first?.key
         let j = beers.firstIndex(where: { $0.beerID == keyWorst }) ?? 0
         let worstBeer = beers[j].beerName
-        let myWorstBeer = ("Worst rating: \(Double(worst ?? 0.00))\n [\(String(keyWorst ?? "NA"))] \(worstBeer)")
+        let worstBrewery = beers[j].brewery
+        let myWorstBeer = ("Worst rating: \(Double(worst ?? 0.00))\n [\(String(keyWorst ?? "NA"))] \(worstBeer) - \(worstBrewery)")
 //        print (myWorstBeer)
         reportText[3] = myWorstBeer
         

@@ -28,6 +28,7 @@
 		964590BF25CF6CB00024BDAB /* fivereviews.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 964590BE25CF6CB00024BDAB /* fivereviews.jpg */; };
 		964590CA25D08C6D0024BDAB /* ReportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964590C925D08C6D0024BDAB /* ReportsViewController.swift */; };
 		964590CD25D08D3D0024BDAB /* allTheBeers.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 964590CC25D08D3D0024BDAB /* allTheBeers.jpeg */; };
+		964590D125D107F70024BDAB /* ALL the Beer2.png in Resources */ = {isa = PBXBuildFile; fileRef = 964590D025D107F70024BDAB /* ALL the Beer2.png */; };
 		9657F21425BA3F6900AD199A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21325BA3F6900AD199A /* AppDelegate.swift */; };
 		9657F21625BA3F6900AD199A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21525BA3F6900AD199A /* SceneDelegate.swift */; };
 		9657F21825BA3F6900AD199A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9657F21725BA3F6900AD199A /* ViewController.swift */; };
@@ -64,6 +65,7 @@
 		964590BE25CF6CB00024BDAB /* fivereviews.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fivereviews.jpg; path = BadgeImages/fivereviews.jpg; sourceTree = SOURCE_ROOT; };
 		964590C925D08C6D0024BDAB /* ReportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewController.swift; sourceTree = "<group>"; };
 		964590CC25D08D3D0024BDAB /* allTheBeers.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = allTheBeers.jpeg; path = BadgeImages/allTheBeers.jpeg; sourceTree = SOURCE_ROOT; };
+		964590D025D107F70024BDAB /* ALL the Beer2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ALL the Beer2.png"; path = "app icons/ALL the Beer2.png"; sourceTree = SOURCE_ROOT; };
 		9657F21025BA3F6900AD199A /* ALL the Beers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ALL the Beers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9657F21325BA3F6900AD199A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9657F21525BA3F6900AD199A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		9645908425CEF8690024BDAB /* BadgeImages */ = {
 			isa = PBXGroup;
 			children = (
+				964590D025D107F70024BDAB /* ALL the Beer2.png */,
 				9645908F25CF0D000024BDAB /* 72beers.jpg */,
 				9645908C25CF0B860024BDAB /* 50beers.jpg */,
 				9645908925CF0A3C0024BDAB /* 25beers.png */,
@@ -245,6 +248,7 @@
 				9645909F25CF58AF0024BDAB /* strong.jpg in Resources */,
 				964590BF25CF6CB00024BDAB /* fivereviews.jpg in Resources */,
 				964590AF25CF60110024BDAB /* flight4.jpeg in Resources */,
+				964590D125D107F70024BDAB /* ALL the Beer2.png in Resources */,
 				9645909925CF52F90024BDAB /* hazy.jpg in Resources */,
 				9645909625CF148E0024BDAB /* nasty.jpeg in Resources */,
 				964590AC25CF5E300024BDAB /* flight3.jpg in Resources */,
