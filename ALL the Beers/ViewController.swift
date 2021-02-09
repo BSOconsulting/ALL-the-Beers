@@ -18,7 +18,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         loadBeers()
-        title = "ALL the Beers! 🍻"
+        title = "ALL the Beer! 🍻"
         
         let defaults = UserDefaults.standard
         let savedRatings = defaults.object(forKey: "savedRatings") as? [String: Double] ?? [String: Double]()
@@ -47,13 +47,28 @@ class ViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Beer", for: indexPath)
         let theBeer = beers[indexPath.row]
-        cell.textLabel?.text = "\(theBeer.beerID): \(theBeer.beerName)"
+        cell.textLabel?.attributedText = makeAttributedString(title: "\(theBeer.beerID)", subtitle: "\(theBeer.beerName)")
+        // cell.textLabel?.text = "\(theBeer.beerID): \(theBeer.beerName)"
         //print("\(ratings.keys)")
+        
+        
         if ratings.keys.contains(theBeer.beerID) {
             cell.accessoryType = .checkmark
         }
         else { cell.accessoryType = .none }
         return cell
+    }
+    
+    func makeAttributedString(title: String, subtitle: String) -> NSAttributedString {
+        let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline)]
+        let subtitleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline), NSAttributedString.Key.foregroundColor: UIColor.systemIndigo]
+
+        let titleString = NSMutableAttributedString(string: "\(title):  ", attributes: titleAttributes)
+        let subtitleString = NSAttributedString(string: subtitle, attributes: subtitleAttributes)
+
+        titleString.append(subtitleString)
+
+        return titleString
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -126,14 +141,21 @@ class ViewController: UITableViewController {
         let savedBadges = defaults.object(forKey: "savedBadges") as? [String: Bool] ?? [String: Bool]()
         badges = savedBadges
         
-        
         var reportText = [Int: String]()
-        
         var sumRatings = 0.0
         for value in ratings.values {
                sumRatings += value
         }
         let numRatings = ratings.values.count
+        
+        if numRatings == 0 {
+            let ac = UIAlertController(title: "Error", message: "Reports are not available if \nyou haven't rated any beers!", preferredStyle: .alert)
+            
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
+            return
+        }
+        
         let avgRatings = (sumRatings / Double(numRatings)).truncate(places:2)    
         let beersRated = ("You have rated \(ratings.keys.count) of 72 beers! [Avg: \(avgRatings)]")
 //        print(beersRated)

@@ -20,8 +20,9 @@ class BadgeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let path = Bundle.main.path(forResource: imageName, ofType: nil)!
         badgeName.text = label
-        badgeImage.image = UIImage(named: imageName)
+        badgeImage.image = UIImage(contentsOfFile: path)!
         
         okButton.layer.cornerRadius = 10.0
         okButton.contentEdgeInsets = UIEdgeInsets(top: 1, left: 5, bottom: 1, right: 5)
@@ -38,6 +39,5 @@ class BadgeViewController: UIViewController {
 //        if let vc = storyboard?.instantiateViewController(withIdentifier: "List") as? ViewController {
 //            navigationController?.pushViewController(vc, animated: true)
 //        }
-        
     }
 }

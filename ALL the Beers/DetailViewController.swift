@@ -125,6 +125,8 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             present(ac, animated: true)
             return
         }
+        
+        // Thread.sleep(forTimeInterval: 1)
         checkBadges()
         save()
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
@@ -156,6 +158,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     
     
     func displayBadge(label: String, name: String) {
+        
         
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Badge") as? BadgeViewController {
             //send over the variables
@@ -396,7 +399,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
 
                 }}))
             self.present(alert, animated: true, completion: nil)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 
                 alert.dismiss(animated: true, completion: nil)
             }
