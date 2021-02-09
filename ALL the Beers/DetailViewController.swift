@@ -90,19 +90,19 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func shareTapped(_ sender: Any) {
         //Create the UIImage - this way didn't capture the title (beer name)
-//        let renderer = UIGraphicsImageRenderer(size: view.frame.size)
-//        let image = renderer.image(actions: { context in
-//            view.layer.render(in: context.cgContext)
-//        })
+        //        let renderer = UIGraphicsImageRenderer(size: view.frame.size)
+        //        let image = renderer.image(actions: { context in
+        //            view.layer.render(in: context.cgContext)
+        //        })
         
         var image :UIImage?
-                let layer = UIApplication.shared.keyWindow!.layer
-                let scale = UIScreen.main.scale
-                UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
-                guard let context = UIGraphicsGetCurrentContext() else {return}
-                layer.render(in:context)
-                image = UIGraphicsGetImageFromCurrentImageContext()
-                UIGraphicsEndImageContext()
+        let layer = UIApplication.shared.keyWindow!.layer
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(layer.frame.size, false, scale);
+        guard let context = UIGraphicsGetCurrentContext() else {return}
+        layer.render(in:context)
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
         
         //Share the results
         let vc = UIActivityViewController(activityItems: [image!], applicationActivities: [])
@@ -149,8 +149,8 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             reviews.removeValue(forKey: beerID!)
         }
         
-//        print ("after Ratings: \(ratings)")
-//        print ("after Reviews: \(reviews)")
+        //        print ("after Ratings: \(ratings)")
+        //        print ("after Reviews: \(reviews)")
         save()
         
         self.navigationController?.popViewController(animated: true)
@@ -358,9 +358,9 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             //return
         }
         
-//                else {
-//                    self.navigationController?.popViewController(animated: true)
-//                }
+        //                else {
+        //                    self.navigationController?.popViewController(animated: true)
+        //                }
         
     }
     
@@ -385,24 +385,37 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     
     func notifyUser()
     {
-        let alert = UIAlertController(title: "Saved!", message: nil, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "", style: .cancel, handler: { action in
-                switch action.style{
-                case .default:
-                    print("default")
-
-                case .cancel:
-                    print("cancel")
-
-                case .destructive:
-                    print("destructive")
-
-                }}))
-            self.present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: "", message: "Saved!", preferredStyle: UIAlertController.Style.alert)
+        //        alert.addAction(UIAlertAction(title: "", style: .cancel, handler: { action in
+        //                switch action.style{
+        //                case .default:
+        //                    print("default")
+        //
+        //                case .cancel:
+        //                    print("cancel")
+        //
+        //                case .destructive:
+        //                    print("destructive")
+        //
+        //                }}))
+        self.present(alert, animated: true, completion: nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-
-                alert.dismiss(animated: true, completion: nil)
-            }
+            
+            alert.dismiss(animated: true, completion: nil)
+            //adding function call below as we seem to have a race condition where alert doesn't always auto-dismiss...
+            self.dismissAnyAlertControllerIfPresent()
+        }
     }
+    
+    func dismissAnyAlertControllerIfPresent() {
+        guard let window :UIWindow = UIApplication.shared.keyWindow , var topVC = window.rootViewController?.presentedViewController else {return}
+        while topVC.presentedViewController != nil  {
+            topVC = topVC.presentedViewController!
+        }
+        if topVC.isKind(of: UIAlertController.self) {
+            topVC.dismiss(animated: false, completion: nil)
+        }
+    }
+    
 }
 

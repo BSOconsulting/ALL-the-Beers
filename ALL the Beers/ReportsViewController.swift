@@ -16,6 +16,8 @@ class ReportsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Super cool reports! 🕵️‍♀️"
 
         let reports = myReportText
 //        print(reports)
