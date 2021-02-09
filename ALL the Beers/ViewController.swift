@@ -10,7 +10,11 @@ import UIKit
 class ViewController: UITableViewController {
     
     var beers = [Beer]()
-    var ratings = [String: Double]()
+    var ratings = [String: Double]() {
+        didSet {
+            title = "Ratings: [\(ratings.count) / 72] 🍻"
+        }
+    }
     var reviews = [String: String]()
     var badges = [String: Bool]()
     
@@ -18,7 +22,6 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         loadBeers()
-        title = "ALL the Beer! 🍻"
         
         let defaults = UserDefaults.standard
         let savedRatings = defaults.object(forKey: "savedRatings") as? [String: Double] ?? [String: Double]()
@@ -31,6 +34,8 @@ class ViewController: UITableViewController {
         
         let savedBadges = defaults.object(forKey: "savedBadges") as? [String: Bool] ?? [String: Bool]()
         badges = savedBadges
+        
+        //title = "Ratings: [\(ratings.count) / 72] 🍻"
     }
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
@@ -62,12 +67,12 @@ class ViewController: UITableViewController {
     func makeAttributedString(title: String, subtitle: String) -> NSAttributedString {
         let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline)]
         let subtitleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline), NSAttributedString.Key.foregroundColor: UIColor.systemIndigo]
-
+        
         let titleString = NSMutableAttributedString(string: "\(title):  ", attributes: titleAttributes)
         let subtitleString = NSAttributedString(string: subtitle, attributes: subtitleAttributes)
-
+        
         titleString.append(subtitleString)
-
+        
         return titleString
     }
     
@@ -121,9 +126,9 @@ class ViewController: UITableViewController {
         defaults.set(reviews, forKey: "savedReviews")
         defaults.set(badges, forKey: "savedBadges")
         //checkStats()
-//        print ("savedRatings: \(ratings)")
-//        print ("savedReviews: \(reviews)")
-//        print ("savedBadges: \(badges)")
+        //        print ("savedRatings: \(ratings)")
+        //        print ("savedReviews: \(reviews)")
+        //        print ("savedBadges: \(badges)")
         self.tableView.reloadData()
         //self.navigationController?.popViewController(animated: true)
     }
@@ -144,7 +149,7 @@ class ViewController: UITableViewController {
         var reportText = [Int: String]()
         var sumRatings = 0.0
         for value in ratings.values {
-               sumRatings += value
+            sumRatings += value
         }
         let numRatings = ratings.values.count
         
@@ -158,7 +163,7 @@ class ViewController: UITableViewController {
         
         let avgRatings = (sumRatings / Double(numRatings)).truncate(places:2)    
         let beersRated = ("You have rated \(ratings.keys.count) of 72 beers! [Avg: \(avgRatings)]")
-//        print(beersRated)
+        //        print(beersRated)
         reportText[1] = beersRated
         
         let favorite = ratings.values.max()
@@ -167,7 +172,7 @@ class ViewController: UITableViewController {
         let favoriteBeer = beers[i].beerName
         let favoriteBrewery = beers[i].brewery
         let myFavoriteBeer = ("Best rating:    \(Double(favorite ?? 0.00))\n [\(String(keyBest ?? "NA"))] \(favoriteBeer) - \(favoriteBrewery)")
-//        print (myFavoriteBeer)
+        //        print (myFavoriteBeer)
         reportText[2] = myFavoriteBeer
         
         let worst = ratings.values.min()
@@ -176,11 +181,11 @@ class ViewController: UITableViewController {
         let worstBeer = beers[j].beerName
         let worstBrewery = beers[j].brewery
         let myWorstBeer = ("Worst rating: \(Double(worst ?? 0.00))\n [\(String(keyWorst ?? "NA"))] \(worstBeer) - \(worstBrewery)")
-//        print (myWorstBeer)
+        //        print (myWorstBeer)
         reportText[3] = myWorstBeer
         
         let myBadges = ("You have earned \(badges.keys.count) of 17 badges!")
-//        print (myBadges)
+        //        print (myBadges)
         reportText[4] = myBadges
         
         
