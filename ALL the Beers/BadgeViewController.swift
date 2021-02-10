@@ -36,6 +36,7 @@ class BadgeViewController: UIViewController {
     
     @IBAction func okTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+        
 //        if let vc = storyboard?.instantiateViewController(withIdentifier: "List") as? ViewController {
 //            navigationController?.pushViewController(vc, animated: true)
 //        }

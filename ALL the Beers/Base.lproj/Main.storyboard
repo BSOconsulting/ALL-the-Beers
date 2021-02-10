@@ -220,7 +220,7 @@
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SU4-o7-yhG">
                                 <rect key="frame" x="146" y="299" width="176" height="20.5"/>
@@ -461,7 +461,6 @@
         <!--Navigation Controller-->
         <scene sceneID="4LG-xn-F32">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DJc-w8-mDx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="DetailNavigationController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="Rto-Vy-p75" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MXX-i0-rXA">
@@ -477,6 +476,7 @@
                         <segue destination="Y8V-dL-Khx" kind="relationship" relationship="rootViewController" id="Oyc-AN-qCQ"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DJc-w8-mDx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2049.275362318841" y="72.321428571428569"/>
         </scene>

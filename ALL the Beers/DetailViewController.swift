@@ -85,7 +85,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         rating = sliderStep
         ratingLabel.text = String(rating)
         ratings[beerID!] = rating
-        save()
+        //save()
     }
     
     @IBAction func shareTapped(_ sender: Any) {
@@ -127,6 +127,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         }
         
         // Thread.sleep(forTimeInterval: 1)
+
         checkBadges()
         save()
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
@@ -152,10 +153,27 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         //        print ("after Ratings: \(ratings)")
         //        print ("after Reviews: \(reviews)")
         save()
+        vibrateTwice()
         
         self.navigationController?.popViewController(animated: true)
+       
+        
+        
     }
     
+    func vibrateTwice() {
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        feedbackGenerator.impactOccurred()
+    }
+    func getTopMostViewController() -> UIViewController? {
+        var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
+
+        while let presentedViewController = topMostViewController?.presentedViewController {
+            topMostViewController = presentedViewController
+        }
+
+        return topMostViewController
+    }
     
     func displayBadge(label: String, name: String) {
         
@@ -187,23 +205,23 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     
     func checkBadges() {
         let numReviews = ratings.count
-        print("you have \(numReviews) ratings")
+        //print("you have \(numReviews) ratings")
         
-        let hazyIPA = ["1-5", "1-6", "1-7", "1-8", "2-7", "2-8", "2-9", "2-10", "3-5", "3-6", "3-7", "4-6", "4-7", "4-8"]
+        let hazyIPA = ["1-05", "1-06", "1-07", "1-08", "2-07", "2-08", "2-09", "2-10", "3-05", "3-06", "3-07", "4-06", "4-07", "4-08"]
         
-        let IPA = ["1-9", "1-10", "1-11", "1-12", "1-13", "1-14", "2-11", "2-12", "2-13", "2-14", "2-15", "3-8", "3-9", "3-10", "3-11", "3-12", "3-13", "3-14", "4-9", "4-10", "4-11", "4-12", "4-13", "4-14", "4-15"]
+        let IPA = ["1-09", "1-10", "1-11", "1-12", "1-13", "1-14", "2-11", "2-12", "2-13", "2-14", "2-15", "3-08", "3-09", "3-10", "3-11", "3-12", "3-13", "3-14", "4-09", "4-10", "4-11", "4-12", "4-13", "4-14", "4-15"]
         
         let strong = ["2-17", "3-17", "4-17", "4-18"]
         
-        let light = ["1-1", "1-5", "2-1", "2-2", "2-5", "3-1", "3-2", "4-1"]
+        let light = ["1-01", "1-05", "2-01", "2-02", "2-05", "3-01", "3-02", "4-01"]
         
-        let flight1 = ["1-1", "1-2", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-11", "1-12", "1-13", "1-14", "1-15", "1-16", "1-17", "1-18"]
+        let flight1 = ["1-01", "1-02", "1-03", "1-04", "1-05", "1-06", "1-07", "1-08", "1-09", "1-10", "1-11", "1-12", "1-13", "1-14", "1-15", "1-16", "1-17", "1-18"]
         
-        let flight2 = ["2-1", "2-2", "2-3", "2-4", "2-5", "2-6", "2-7", "2-8", "2-9", "2-10", "2-11", "2-12", "2-13", "2-14", "2-15", "2-16", "2-17", "2-18"]
+        let flight2 = ["2-01", "2-02", "2-03", "2-04", "2-05", "2-06", "2-07", "2-08", "2-09", "2-10", "2-11", "2-12", "2-13", "2-14", "2-15", "2-16", "2-17", "2-18"]
         
-        let flight3 = ["3-1", "3-2", "3-3", "3-4", "3-5", "3-6", "3-7", "3-8", "3-9", "3-10", "3-11", "3-12", "3-13", "3-14", "3-15", "3-16", "3-17", "3-18"]
+        let flight3 = ["3-01", "3-02", "3-03", "3-04", "3-05", "3-06", "3-07", "3-08", "3-09", "3-10", "3-11", "3-12", "3-13", "3-14", "3-15", "3-16", "3-17", "3-18"]
         
-        let flight4 = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", "4-9", "4-10", "4-11", "4-12", "4-13", "4-14", "4-15", "4-16", "4-17", "4-18"]
+        let flight4 = ["4-01", "4-02", "4-03", "4-04", "4-05", "4-06", "4-07", "4-08", "4-09", "4-10", "4-11", "4-12", "4-13", "4-14", "4-15", "4-16", "4-17", "4-18"]
         
         
         if hazyIPA.contains(beerID!) && badges["hazy"] != true {
@@ -385,7 +403,10 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     
     func notifyUser()
     {
+        
+        
         let alert = UIAlertController(title: "", message: "Saved!", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
         //        alert.addAction(UIAlertAction(title: "", style: .cancel, handler: { action in
         //                switch action.style{
         //                case .default:
@@ -398,7 +419,11 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         //                    print("destructive")
         //
         //                }}))
-        self.present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.getTopMostViewController()?.present(alert, animated: true, completion: nil)
+        }
+        
+        //self.present(alert, animated: true, completion: nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             
             alert.dismiss(animated: true, completion: nil)

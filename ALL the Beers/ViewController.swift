@@ -56,7 +56,6 @@ class ViewController: UITableViewController {
         // cell.textLabel?.text = "\(theBeer.beerID): \(theBeer.beerName)"
         //print("\(ratings.keys)")
         
-        
         if ratings.keys.contains(theBeer.beerID) {
             cell.accessoryType = .checkmark
         }
