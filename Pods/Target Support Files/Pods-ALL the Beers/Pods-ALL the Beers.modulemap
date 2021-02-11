@@ -1,0 +1,6 @@
+module Pods_ALL_the_Beers {
+  umbrella header "Pods-ALL the Beers-umbrella.h"
+
+  export *
+  module * { export * }
+}
