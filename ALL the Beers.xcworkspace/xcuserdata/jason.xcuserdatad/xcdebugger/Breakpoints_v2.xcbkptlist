@@ -14,8 +14,8 @@
             filePath = "ALL the Beers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "ALL the Beers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "deleteTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -55,22 +55,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B18D20A0-15C4-478C-A589-9EB1AB5DFC51"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ALL the Beers/DetailViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "deleteTapped(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "C2CFE136-9BA7-41E8-96D0-5214D2C9E945"
             shouldBeEnabled = "No"
             ignoreCount = "1"
@@ -78,8 +62,8 @@
             filePath = "ALL the Beers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,8 +90,8 @@
             filePath = "ALL the Beers/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "424"
-            endingLineNumber = "424"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
             landmarkName = "notifyUser()"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,8 +106,8 @@
             filePath = "ALL the Beers/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "430"
-            endingLineNumber = "430"
+            startingLineNumber = "417"
+            endingLineNumber = "417"
             landmarkName = "notifyUser()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,8 +122,8 @@
             filePath = "ALL the Beers/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
             landmarkName = "notifyUser()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,8 +138,8 @@
             filePath = "ALL the Beers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "viewDidAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
