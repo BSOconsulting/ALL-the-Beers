@@ -91,6 +91,7 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
     @IBAction func deleteTapped(_ sender: Any) {
         let ac = UIAlertController(title: "Delete all ratings?", message: "Type DELETE and hit OK to delete all ratings", preferredStyle: .alert)
         ac.addTextField()

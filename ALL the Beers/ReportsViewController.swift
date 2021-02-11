@@ -13,14 +13,13 @@ class ReportsViewController: UIViewController {
     
     var myReportText = [Int: String]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Super cool reports! 🕵️‍♀️"
-
-        let reports = myReportText
-//        print(reports)
+        
+        //let reports = myReportText
+        //        print(reports)
         
         imageView.layer.borderWidth = 2
         imageView.layer.borderColor = UIColor.black.cgColor
@@ -29,6 +28,4 @@ class ReportsViewController: UIViewController {
             textView.insertText("\(String(myReportText[i]!))\n\n")
         }
     }
-    
-
 }

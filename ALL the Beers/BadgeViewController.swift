@@ -31,7 +31,6 @@ class BadgeViewController: UIViewController {
         
         badgeImage.layer.borderWidth = 2
         badgeImage.layer.borderColor = UIColor.black.cgColor
-
     }
     
     @IBAction func okTapped(_ sender: Any) {
