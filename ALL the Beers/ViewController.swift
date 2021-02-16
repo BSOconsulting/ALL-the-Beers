@@ -131,6 +131,7 @@ class ViewController: UITableViewController {
         //        print ("savedBadges: \(badges)")
         self.tableView.reloadData()
         //self.navigationController?.popViewController(animated: true)
+    
     }
     
     @IBAction func reportsTapped(_ sender: Any) {
@@ -199,6 +200,8 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    
     
     
     func loadBeers() {

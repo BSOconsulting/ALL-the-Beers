@@ -401,9 +401,28 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         //self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func exportTapped(_ sender: Any) {
+        
+        var output = String()
+        
+        let sortRatings = ratings.sorted(by: <)
+
+        for (key, value) in sortRatings {
+            let i = beers.firstIndex(where: { $0.beerID == key }) ?? 0
+            let myBeer = beers[i].beerName
+            let myBrewery = beers[i].brewery
+
+            output += ("\(key): \(myBeer) (\(myBrewery)) - \(value): \(reviews[key] ?? "")\n")
+        
+        }
+        var myOutput = [output]
+        let vc = UIActivityViewController(activityItems: myOutput.sorted(), applicationActivities: [])
+        present(vc, animated: true)
+    }
+    
+    
     func notifyUser()
     {
-        
         
         let alert = UIAlertController(title: "", message: "Saved!", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel))

@@ -317,11 +317,18 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ksz-1T-UJ6">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="CpK-cv-m0b">
-                            <connections>
-                                <action selector="shareTapped:" destination="Y8V-dL-Khx" id="e4D-mw-dKY"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="action" id="CpK-cv-m0b">
+                                <connections>
+                                    <action selector="shareTapped:" destination="Y8V-dL-Khx" id="e4D-mw-dKY"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Export" id="q6X-Si-W5g">
+                                <connections>
+                                    <action selector="exportTapped:" destination="Y8V-dL-Khx" id="0mE-aw-hbJ"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
