@@ -4,6 +4,7 @@
 //
 //  Created by Jason Affourtit on 2/6/21.
 //
+//  This VC is used to display any badge(s) that were earned upon rating a beer
 
 import UIKit
 
@@ -33,6 +34,8 @@ class BadgeViewController: UIViewController {
         badgeImage.layer.borderColor = UIColor.black.cgColor
     }
     
+    // dismiss this view controller and return to the beer rating page
+    // or go back to any other badge(s) earned if a given rating triggered multiple badges
     @IBAction func okTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
         

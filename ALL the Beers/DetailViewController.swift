@@ -4,12 +4,14 @@
 //
 //  Created by Jason Affourtit on 2/03/21.
 //
+//  this VC is the main interface for rating each beer as well as for sharing the same and doing bulk data export
 
 import UIKit
 import AVFoundation
 
 class DetailViewController: UIViewController, UITextViewDelegate {
     
+    // all the many IBOutlets for the labels and other UI elements
     @IBOutlet var flightLabel: UILabel!
     @IBOutlet var orderLabel: UILabel!
     @IBOutlet var breweryLabel: UILabel!
@@ -22,6 +24,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var ratingSlider: UISlider!
     @IBOutlet var commentView: UIView!
     
+    // global variables; probably too many but definitely got lazy
     var beerID: String?
     var flight: Int?
     var order: Int?
@@ -32,6 +35,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     var ibu: String?
     var region: String?
     var rating = Double()
+    // step allows for the UISlider to use 0.25 increments
     let step = 0.25
     var ratings = [String: Double]()
     var reviews = [String: String]()
@@ -39,10 +43,10 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     var beers: [Beer] = []
     var alert: UIAlertController!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // load the saved ratings/reviews/badges
         let defaults = UserDefaults.standard
         let savedRatings = defaults.object(forKey: "savedRatings") as? [String: Double] ?? [String: Double]()
         ratings = savedRatings
@@ -78,7 +82,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     }
     
     
-    
+    // rating Slider code; uses a 0.25 step to increment
     @IBAction func sliderChanged(_ sender: Any) {
         
         let sliderStep = round(Double(ratingSlider.value) / step) * step
@@ -88,6 +92,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         //save()
     }
     
+    // function to allow for sharing of a given beer's rating page
     @IBAction func shareTapped(_ sender: Any) {
         //Create the UIImage - this way didn't capture the title (beer name)
         //        let renderer = UIGraphicsImageRenderer(size: view.frame.size)
@@ -109,6 +114,8 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         present(vc, animated: true)
     }
     
+    // allows for saving of the text field in case the user accidentally navigates away
+    // this probably isn't the cleanest but the app is so lightweight it seemed OK
     func textViewDidChange(_ textView: UITextView) {
         //print("saving comments!")
         let comments = commentBox.text ?? ""
@@ -116,8 +123,8 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         save()
     }
     
+    // calls the function to save a given review; checks to ensure the beer has been rated first
     @IBAction func saveTapped(_ sender: Any) {
-        
         if ratingLabel.text == "" {
             let ac = UIAlertController(title: "Error", message: "You haven't rated this beer.", preferredStyle: .alert)
             
@@ -125,15 +132,15 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             present(ac, animated: true)
             return
         }
-        
-        // Thread.sleep(forTimeInterval: 1)
 
+        // calls the function to see if any badges were earned, saves the results, and notifies the user
         checkBadges()
         save()
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         notifyUser()
     }
     
+    // clean up everything in case the user wants to delete an individual beer rating
     @IBAction func deleteTapped(_ sender: Any) {
         ratingLabel.text = ""
         commentBox.text = ""
@@ -150,21 +157,19 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             reviews.removeValue(forKey: beerID!)
         }
         
-        //        print ("after Ratings: \(ratings)")
-        //        print ("after Reviews: \(reviews)")
         save()
         vibrateTwice()
         
         self.navigationController?.popViewController(animated: true)
-       
-        
-        
     }
     
+    // this function should be renamed as I changed to a haptic alert
     func vibrateTwice() {
         let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
         feedbackGenerator.impactOccurred()
     }
+    
+    // a function I found in efforts to avoid alerts that don't auto-dismiss. I don't think it's working
     func getTopMostViewController() -> UIViewController? {
         var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
 
@@ -175,9 +180,8 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         return topMostViewController
     }
     
+    // if a badge has been earned, pass the information to the BadgeViewController and launch it
     func displayBadge(label: String, name: String) {
-        
-        
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Badge") as? BadgeViewController {
             //send over the variables
             vc.label = label
@@ -186,23 +190,22 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    // check if the user has earned any badges
     func checkStyleBadges(style: [String]) -> Bool {
-        
         var yes = 0
         for i in 0...(style.count - 1) {
             if ratings.keys.contains(style[i]) {
                 yes += 1
             }
-            //else { print ("\(style[i]): no"); return false }
         }
         if yes == style.count {
-            //print("\(yes): you get a badge!")
             return true
         }
         return false
     }
     
-    
+    // this section contains all the logic for currently employed badges
+    // it is out of place in this file and should be separated out from it
     func checkBadges() {
         let numReviews = ratings.count
         //print("you have \(numReviews) ratings")
@@ -375,32 +378,24 @@ class DetailViewController: UIViewController, UITextViewDelegate {
             displayBadge(label: badgeLabel, name: imageName)
             //return
         }
-        
-        //                else {
-        //                    self.navigationController?.popViewController(animated: true)
-        //                }
-        
     }
     
+    // function to save the results
     func save() {
         let defaults = UserDefaults.standard
-        //let comments = commentBox.text ?? ""
-        
-        //        if beerID != nil {
-        //            ratings[beerID!] = rating
-        //reviews[beerID!] = comments
-        //        }
-        
         defaults.set(ratings, forKey: "savedRatings")
         defaults.set(reviews, forKey: "savedReviews")
         defaults.set(badges, forKey: "savedBadges")
         //checkStats()
-        print ("savedRatings: \(ratings)")
-        print ("savedReviews: \(reviews)")
-        print ("savedBadges: \(badges)")
+//        print ("savedRatings: \(ratings)")
+//        print ("savedReviews: \(reviews)")
+//        print ("savedBadges: \(badges)")
         //self.navigationController?.popViewController(animated: true)
     }
     
+    // function to bulk export the ratings. This is a bit of a kludge
+    // and was added in solely as a user request. Would rewrite and place elsewhere
+    // in an actual release of this or a related app
     @IBAction func exportTapped(_ sender: Any) {
         
         var output = String()
@@ -420,29 +415,19 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         present(vc, animated: true)
     }
     
-    
+    // notify the user that the input was saved
     func notifyUser()
     {
         
         let alert = UIAlertController(title: "", message: "Saved!", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-        //        alert.addAction(UIAlertAction(title: "", style: .cancel, handler: { action in
-        //                switch action.style{
-        //                case .default:
-        //                    print("default")
-        //
-        //                case .cancel:
-        //                    print("cancel")
-        //
-        //                case .destructive:
-        //                    print("destructive")
-        //
-        //                }}))
+
         DispatchQueue.main.async {
             self.getTopMostViewController()?.present(alert, animated: true, completion: nil)
         }
         
-        //self.present(alert, animated: true, completion: nil)
+        // this function is intended to auto-dismiss the alert. It works ~90% of the time, and in the remainder,
+        // the alert persists. I suspect a race condition but do not intend to address in this test release.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             
             alert.dismiss(animated: true, completion: nil)
@@ -451,6 +436,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    // per above, this attempts to ensure the alert is dismissed. Not working as intended
     func dismissAnyAlertControllerIfPresent() {
         guard let window :UIWindow = UIApplication.shared.keyWindow , var topVC = window.rootViewController?.presentedViewController else {return}
         while topVC.presentedViewController != nil  {

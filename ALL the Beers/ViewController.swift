@@ -4,25 +4,35 @@
 //
 //  Created by Jason Affourtit on 2/03/21.
 //  Not for distribution
+//
+// Main ViewController for the app. This displays the list of beers to be / rated, where
+// the checkmark is used to indicate those already entered. The title displays the current tally.
+// There is a function to delete all in the database and another to show some basic stats via a report
 
 import UIKit
 
 class ViewController: UITableViewController {
     
-    var beers = [Beer]()
+    var beers = [Beer]() // struct that contains the loaded CSV file
+    
+    // ratings are the numerical, reviews the text. These shouldn't be separate arrays, silly.
     var ratings = [String: Double]() {
+        // when we have new ratings, update the counter at the top of the screen
         didSet {
             title = "Ratings: [\(ratings.count) / 72] 🍻"
         }
     }
     var reviews = [String: String]()
+    // another separate array, this time to store the badges earned
     var badges = [String: Bool]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // call loadBeers to import the CSV data from my original spreadsheet
         loadBeers()
         
+        // load the saved ratings, results, and badges
         let defaults = UserDefaults.standard
         let savedRatings = defaults.object(forKey: "savedRatings") as? [String: Double] ?? [String: Double]()
         ratings = savedRatings
@@ -38,6 +48,7 @@ class ViewController: UITableViewController {
         //title = "Ratings: [\(ratings.count) / 72] 🍻"
     }
     override func viewDidAppear(_ animated: Bool) {
+        // reload the tableView after edits to update the checkmarks and menu bar counter
         self.tableView.reloadData()
     }
     
@@ -53,9 +64,8 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Beer", for: indexPath)
         let theBeer = beers[indexPath.row]
         cell.textLabel?.attributedText = makeAttributedString(title: "\(theBeer.beerID)", subtitle: "\(theBeer.beerName)")
-        // cell.textLabel?.text = "\(theBeer.beerID): \(theBeer.beerName)"
-        //print("\(ratings.keys)")
         
+        // use checkmarks to indicate that a beer has been rated
         if ratings.keys.contains(theBeer.beerID) {
             cell.accessoryType = .checkmark
         }
@@ -63,6 +73,7 @@ class ViewController: UITableViewController {
         return cell
     }
     
+    // AttributedString formatting function found online. This will be used several places
     func makeAttributedString(title: String, subtitle: String) -> NSAttributedString {
         let titleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .subheadline)]
         let subtitleAttributes = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .headline), NSAttributedString.Key.foregroundColor: UIColor.systemIndigo]
@@ -75,6 +86,7 @@ class ViewController: UITableViewController {
         return titleString
     }
     
+    // These are the variables we need to make available to the DetailViewController used for beer rating/review
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             //send over the variables
@@ -92,6 +104,7 @@ class ViewController: UITableViewController {
         }
     }
     
+    // Calls function to allow deleting the entire database of ratings. Confirmation message to make certain!
     @IBAction func deleteTapped(_ sender: Any) {
         let ac = UIAlertController(title: "Delete all ratings?", message: "Type DELETE and hit OK to delete all ratings", preferredStyle: .alert)
         ac.addTextField()
@@ -108,32 +121,28 @@ class ViewController: UITableViewController {
         present(ac, animated: true)
     }
     
+    // function to allow deleting the entire database of ratings.
     func deleteReviews() {
-        //        print("before:")
-        //        print(ratings, reviews)
         
         ratings.removeAll()
         reviews.removeAll()
         badges.removeAll()
         save()
-        //        print("after:")
-        //        print(ratings, reviews)
     }
     
+    // save function to update our saved objects in UserDefaults
     func save() {
         let defaults = UserDefaults.standard
         defaults.set(ratings, forKey: "savedRatings")
         defaults.set(reviews, forKey: "savedReviews")
         defaults.set(badges, forKey: "savedBadges")
-        //checkStats()
-        //        print ("savedRatings: \(ratings)")
-        //        print ("savedReviews: \(reviews)")
-        //        print ("savedBadges: \(badges)")
+
         self.tableView.reloadData()
         //self.navigationController?.popViewController(animated: true)
     
     }
     
+    // function to call up the Reports page after populating the variables needed
     @IBAction func reportsTapped(_ sender: Any) {
         let defaults = UserDefaults.standard
         let savedRatings = defaults.object(forKey: "savedRatings") as? [String: Double] ?? [String: Double]()
@@ -161,7 +170,7 @@ class ViewController: UITableViewController {
             present(ac, animated: true)
             return
         }
-        
+        // below are the calculations for the report
         let avgRatings = (sumRatings / Double(numRatings)).truncate(places:2)    
         let beersRated = ("You have rated \(ratings.keys.count) of 72 beers! [Avg: \(avgRatings)]")
         //        print(beersRated)
@@ -189,21 +198,18 @@ class ViewController: UITableViewController {
         //        print (myBadges)
         reportText[4] = myBadges
         
-        
-        
-        
+        // message to let them know I'm not dealing with ties; unordered array
         reportText[5] = "\n*Dealer's choice in case of a tie"
         
+        // launch the ReportsViewController
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Reports") as? ReportsViewController {
             //send over the variables
             vc.myReportText = reportText
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
-    
-    
-    
+
+    // function to parse the CSV and create the objects needed; heavily based off online code
     func loadBeers() {
         guard let filepath = Bundle.main.path(forResource: "allTheBeer", ofType: "csv") else {
             return
@@ -241,10 +247,10 @@ class ViewController: UITableViewController {
                 beers.append(thisBeer)
             }
         }
-        //print(beers)
     }
-    
 }
+
+// Extension to enable clean truncation to desired # of digits
 extension Double
 {
     func truncate(places : Int)-> Double
